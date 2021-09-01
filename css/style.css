@@ -1,0 +1,121 @@
+body {
+    background-image: url('../assets/images/boom2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.home__content-logo {
+    width: 30vw;
+    height: 30vw;
+}
+
+.register__content-logo {
+    width: 150px;
+    height: 150px;
+    /* border: 1px solid #aaa; */
+}
+
+.register__content-container {
+    width: 60vw;
+}
+
+.service__content-add {
+    width: 300px;
+    height: 150px;
+}
+.service__content-container {
+    /* width: 15vw;
+    height: 10vw; */
+}
+
+.service__button {
+    border: 1.5px solid #aaa;
+    width: 80px;
+}
+
+.img-thumbnail {
+    padding: 0;
+    max-height: 30vw;
+    max-width: 30vw;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+@media (min-width: 100px) {
+
+    .home__content-logo {
+        width: 60vw;
+        height: 60vw;
+    }
+
+    .navbar-container {
+        padding-left: 0px;
+    }
+
+    .register__content-container {
+        width: 80vw;
+    }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    
+    .home__content-logo {
+        width: 60vw;
+        height: 60vw;
+    }
+
+    .register__content-container {
+        width: 80vw;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .home__content-logo {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    .register__content-container {
+        width: 80vw;
+    }
+
+    .navbar-container {
+        padding-left: 60px;
+        /* padding-right: 30px; */
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .register__content-container {
+        width: 70vw;
+    }
+}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .register__content-container {
+        width: 55vw;
+    }
+}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    .register__content-container {
+        width: 50vw;
+    }
+}

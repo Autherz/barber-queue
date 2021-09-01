@@ -160,7 +160,7 @@
             } else {
                 alert("Please select a file.")
             }
-
+            
             axios.post("../../controllers/service_type/add.php", {
                 name: $("#addServiceName").val(),
                 // price: $("#addServicePrice").val(),

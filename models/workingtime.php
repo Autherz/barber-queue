@@ -23,9 +23,10 @@
             }
         }
 
-        public static function get() {
+        public static function get($hair_dressor_id, $date) {
             try {
-                $stmt = DB::get()->prepare("SELECT * FROM hair_dressor_workingtime");
+                // $temp_time = date('Y-m-d', strtotime($date));
+                $stmt = DB::get()->prepare("SELECT * FROM hair_dressor_workingtime WHERE hair_dressor_id = $hair_dressor_id AND worktime_date >= '$date' ORDER BY worktime_date, start_time ASC");
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 return $stmt;

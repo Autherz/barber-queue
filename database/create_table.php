@@ -41,10 +41,10 @@
         // );'
         'CREATE TABLE hair_dressor_workingtime(
             working_time_id INT AUTO_INCREMENT,
-            date VARCHAR(100) NOT NULL,
+            worktime_date DATE NOT NULL,
             start_time VARCHAR(100) NOT NULL,
             end_time VARCHAR(100) NOT NULL,
-            status VARCHAR(100) NOT NULL,
+            hair_dressor_status VARCHAR(100) NOT NULL,
             hair_dressor_id INT,
             PRIMARY KEY(working_time_id),
             FOREIGN KEY(hair_dressor_id) REFERENCES hair_dressor(hair_dressor_id)

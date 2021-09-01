@@ -4,6 +4,8 @@
     require_once '../../vendor/autoload.php';
     require_once "../../database/connect.php";
     require_once "../../models/hair_dressor.php";
+
+
     // #### Verify
     require_once "../../models/jwt.php";
     $data_token = Token::verify();
@@ -151,11 +153,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.th.min.js" integrity="sha512-cp+S0Bkyv7xKBSbmjJR0K7va0cor7vHYhETzm2Jy//ZTQDUvugH/byC4eWuTii9o5HN9msulx2zqhEXWau20Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-
+    $(document).ready(async function() {
         const params = new URLSearchParams(window.location.search)
 
         $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy',
+            format: 'yyyy-mm-dd',
             startDate: '-3d'
         });
 
@@ -166,25 +168,26 @@
                 $('#addHairDressorButton').prop("disabled",true);
             }
             
-            console.log($('#date').val())
-            console.log($('#start').val())
-            console.log($('#end').val())
-            console.log(params.get('hair_dressor_id'))
-            console.log(params.get('hair_dressor_name'))
+            console.log($('#end').val() - $('#start').val())
 
-            axios.post("../../controllers/hair_booking/add.php", {
-                date: $('#date').val(),
-                start_time: $('#start').val(),
-                end_time: $('#end').val(),
-                status: 'ว่าง',
-                hair_dressor_id: params.get('hair_dressor_id')
-            }).then(function(response) {
-                location.reload();
-            }).catch((err) => {
-                console.log(err.response.data)
-                console.log(err.response.status)
-            })
-           
+            var temp_time = moment($('#start').val() ,"HH.mm")
+
+            for (let i = $('#start').val() ; i < $('#end').val(); i++) {
+                // console.log( temp_time.format('HH.mm') +  ' - ' +  temp_time.add(1, "hours").format('HH.mm'))
+                axios.post("../../controllers/hair_booking/add.php", {
+                    date: $('#date').val(),
+                    start_time: temp_time.format('HH.mm'),
+                    end_time: temp_time.add(1, "hours").format('HH.mm'),
+                    status: 'ว่าง',
+                    hair_dressor_id: params.get('hair_dressor_id')
+                }).then(function(response) {
+                    // location.reload();
+                }).catch((err) => {
+                    console.log(err.response.data)
+                    console.log(err.response.status)
+                })
+            }
+            location.reload();
         })
 
         
@@ -192,10 +195,19 @@
         const listTime = [
             '09.00 - 10.00',
             '10.00 - 11.00',
-            '11.00 - 12.00'
+            '11.00 - 12.00',
+            '12.00 - 13.00',
+            '13.00 - 14.00',
+            '14.00 - 15.00',
+            '15.00 - 16.00',
+            '16.00 - 17.00',
+            '17.00 - 18.00',
+            '18.00 - 19.00',
+            '19.00 - 20.00',
+            '20.00 - 21.00',
         ]
         const listSingleTime = [
-            '09.00', '10.00', '11.00', '12.00'
+            '09.00', '10.00', '11.00', '12.00', '13.00', '14.00', '15.00' , '16.00', '17.00', '18.00', '19.00', '20.00'
         ]
         
         // Set select option start
@@ -267,25 +279,45 @@
             }
         });
         
-        axios.get("../../controllers/hair_booking/get.php")
+        var booking_data = []
+
+        await axios.get("../../controllers/hair_booking/get.php?hair_dressor_id=" + params.get('hair_dressor_id') + '&date=' + moment(new Date()).format("YYYY-MM-DD"))
         .then(function(response) {
-            console.log(response.data)
+            booking_data = response.data.data
         }).catch((err) => {
             console.log(err.response.data)
             console.log(err.response.status)
         })
-        
+    
+        console.log(booking_data)
+
         var booking;
-        const dateNow = moment().format('DD/MM/YYYY');
+        const dateNow = moment().format('YYYY-MM-DD');
 
         for(let i = 0; i < 7; i++) {
-            listDate.push(moment(dateNow).add(i, 'days').format('DD/MM/YYYY'))
+            listDate.push(moment(dateNow).add(i, 'days').format('YYYY-MM-DD'))
         }
         console.log(listDate)
         for( let i = 0; i < listDate.length ; i++) {
             booking += '<tr>'
             booking += '<th scope="row">' + listDate[i] + '</th>'
             for( let j = 0; j < listTime.length ; j++) {
+                // when match all condition
+                var tik = false
+                for(let k = 0; k < booking_data.length; k++) {
+                    if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ว่าง') {
+                        booking += '<td><button class="w-100 booking-button" style="background-color: transparent;" data-array=' + k +'>' + 'จอง' + '</button></td>'
+                        tik = true
+                    }
+
+                    if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ไม่ว่าง') {
+                        booking += '<td><button class="w-100" style="background-color: transparent;" data-array=' + k + ' disabled>' + 'ไม่ว่าง' + '</button></td>'
+                        tik = true
+                    }
+                }
+                if(!tik) {
+                    booking += '<td></td>'
+                }
                 // booking += '<td><button class="w-100">' + 'จอง' + '</button></td>'
             }
             booking += '</tr>'
@@ -294,5 +326,10 @@
         $('#booking').html(
             booking
         );
+
+        $('.booking-button').click(function() {
+            console.log(booking_data[$(this).attr('data-array')])
+        })
+    });
     </script>
 </body>

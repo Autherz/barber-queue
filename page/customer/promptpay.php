@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <img class="mx-auto mt-5 mb-2 img-thumbnail" style="max-width: 50vw; max-height:50vw;" id="preview">
+                        <img class="mx-auto mt-5 mb-2 img-thumbnail" style="max-width: 30vw; max-height:30vw;" id="preview">
                     </div>
                     <div class="mx-auto">
                         กรุณาแนบสลิปเงินของคุณ
@@ -120,7 +120,7 @@
                 file: file_name
             }).then(function(response) {
                 // location.reload();
-                // location.href = 'main.php'
+                location.href = 'main.php'
             }).catch((err) => {
                 console.log(err.response.data)
                 console.log(err.response.status)

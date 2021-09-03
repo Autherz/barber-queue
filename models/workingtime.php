@@ -26,7 +26,7 @@
         public static function get($hair_dressor_id, $date) {
             try {
                 // $temp_time = date('Y-m-d', strtotime($date));
-                $stmt = DB::get()->prepare("SELECT * FROM hair_dressor_workingtime WHERE hair_dressor_id = $hair_dressor_id AND worktime_date >= '$date' ORDER BY worktime_date, start_time ASC");
+                $stmt = DB::get()->prepare("SELECT * FROM hair_dressor_workingtime  WHERE hair_dressor_id = $hair_dressor_id AND worktime_date >= '$date' ORDER BY worktime_date, start_time ASC");
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 return $stmt;
@@ -43,6 +43,17 @@
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 return $stmt;
             } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+
+        public function update($id) {
+            try {
+                $stmt = DB::get()->prepare("UPDATE hair_dressor_workingtime SET hair_dressor_status = '$this->status' WHERE working_time_id = $id");
+                $stmt->execute();
+                // return DB::get()->lastInsertId();
+            } catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
         }

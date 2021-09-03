@@ -52,7 +52,7 @@
                     </div>
                     <span class=""><i class="fas fa-chevron-down"></i></span>
                 </button>
-            </div>';
+            </div>
         <?php 
             }
         ?>

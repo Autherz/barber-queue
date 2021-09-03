@@ -4,7 +4,11 @@
     require_once '../../vendor/autoload.php';
     require_once "../../database/connect.php";
     require_once "../../models/hair_dressor.php";
+    require_once "../../models/workingtime.php";
 
+    $workingtime_hair_dressor = HairDressor::getById($_GET['hair_dressor_id']);
+
+    $workingtime_hair_dressor_data = $workingtime_hair_dressor->fetch();
 
     // #### Verify
     require_once "../../models/jwt.php";
@@ -50,8 +54,11 @@
                 </div>
             </div>
         </div>
-        <div class="m-5" style="width: 100px;">
-            <div class="bg-white"><?php echo $_GET["hair_dressor_name"] ?></div>
+        <div class="m-5 bg-white" style="width: 400px;">
+            <div class="d-flex bg-white">
+                <img src=<?php echo '../../' . $workingtime_hair_dressor_data['hair_dressor_image'] ?> alt="">
+                <div class="bg-white m-auto"><?php echo $_GET["hair_dressor_name"] ?></div>
+            </div>
         </div>
         <table class="table caption-top bg-white">
             <caption>List of users</caption>
@@ -95,8 +102,13 @@
         <div class="d-flex ms-auto mt-auto me-2 mb-2">
             <div class="d-flex service__content-add bg-white">
                 <button class="m-auto service__button" style="background-color: transparent;width: 100px;" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
-                <button class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
+                <button onclick="location.href='main.php'" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
             </div>
+        </div>
+        <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
+            <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button" style="background-color: white;">
+                กลับ
+            </button>
         </div>
     </div>
 
@@ -146,6 +158,40 @@
         </div>
     </div>
     </div>
+
+    <!-- WOrk Modal -->
+    <div class="modal fade" id="editService" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">แก้ไข</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-container">
+                <input type="hidden" placeholder="id" id="editWorkingId">
+                <div class="d-flex px-5 my-2">
+                    <div class="my-auto">
+                        เลือกสถานะ
+                    </div>
+                    <div class="ms-auto">
+                        <select class="" aria-label="Default select example" id="status">
+                            
+                            <option value="ว่าง">ว่าง</option>
+                            <option value="ไม่ว่าง">ไม่ว่าง</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex px-5 my-2" id="addModalError"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="editHairDressorButton" type="button" class="btn btn-primary">แก้ไข</button>
+        </div>
+        </div>
+    </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -189,6 +235,21 @@
             }
             location.reload();
         })
+
+        $('#editHairDressorButton').click(async function(event) {
+            console.log($('#editWorkingId').val())
+            console.log($('#status').val())
+
+            axios.post("../../controllers/hair_booking/update.php", {
+                id: $('#editWorkingId').val(),
+                status: $('#status').val()
+            }).then(function(response) {
+                location.reload();
+            }).catch((err) => {
+                console.log(err.response.data)
+                console.log(err.response.status)
+            })
+        });
 
         
         var listDate = [];
@@ -306,12 +367,12 @@
                 var tik = false
                 for(let k = 0; k < booking_data.length; k++) {
                     if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ว่าง') {
-                        booking += '<td><button class="w-100 booking-button" style="background-color: transparent;" data-array=' + k +'>' + 'จอง' + '</button></td>'
+                        booking += '<td><button class=" w-100 booking-button" style="background-color: transparent;" data-array=' + k +' data-bs-toggle="modal" data-bs-target="#editService">' + 'จอง' + '</button></td>'
                         tik = true
                     }
 
                     if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ไม่ว่าง') {
-                        booking += '<td><button class="w-100" style="background-color: transparent;" data-array=' + k + ' disabled>' + 'ไม่ว่าง' + '</button></td>'
+                        booking += '<td><button class=" w-100" style="background-color: transparent;" data-array=' + k + ' data-bs-toggle="modal" data-bs-target="#editService" disabled>' + 'ไม่ว่าง' + '</button></td>'
                         tik = true
                     }
                 }
@@ -329,6 +390,9 @@
 
         $('.booking-button').click(function() {
             console.log(booking_data[$(this).attr('data-array')])
+            // editWorkingId
+            $('#editWorkingId').val(booking_data[$(this).attr('data-array')].working_time_id)
+            $('#status').val(booking_data[$(this).attr('data-array')].hair_dressor_status)
         })
     });
     </script>

@@ -36,11 +36,21 @@
             }
         }
 
+        public static function updateStatus($booking_id) {
+            try {
+                $stmt = DB::get()->prepare("UPDATE booking SET slip_file = '$path', booking_status = 'ชำระแล้ว' WHERE booking_id = $booking_id");
+                $stmt->execute();
+                // return DB::get()->lastInsertId();
+            } catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
         public static function updateSlip($path, $booking_id) {
             try {
                 $currentDate = date("Y-m-d");
                 $currentTime = date("h:i");
-                $stmt = DB::get()->prepare("UPDATE booking SET slip_file = '$path', paid_date = '$currentDate', paid_time = '$currentTime', booking_status = 'ชำระแล้ว' WHERE booking_id = $booking_id");
+                $stmt = DB::get()->prepare("UPDATE booking SET slip_file = '$path', paid_date = '$currentDate', paid_time = '$currentTime' WHERE booking_id = $booking_id");
                 $stmt->execute();
                 // return DB::get()->lastInsertId();
             } catch(PDOException $e){

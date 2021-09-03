@@ -295,7 +295,7 @@
             services += '<div class="d-flex flex-column service__content-container bg-white p-3">'
             services +=     '<div class="d-flex">'
             services +=         '<button class="service_edit m-auto service__button" style="background-color: transparent;" data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
-            services +=         '<button class="m-auto service__button" style="background-color: transparent;">ลบ</button>'
+            services +=         '<button class="service_delete m-auto service__button" style="background-color: transparent;" data-array='+ i + '>ลบ</button>'
             services +=     '</div>'
             services +=     '<div class="mx-auto my-3" style="width: 100px; height: 100px;">'
             services +=         '<img class="w-100 h-100" src=../../' + services_data[i].service_file + ' alt="">'
@@ -319,6 +319,18 @@
             $('#editServiceId').val(services_data[$(this).attr('data-array')].service_type_id);
             $('#editServiceName').val(services_data[$(this).attr('data-array')].service_type_name);
             $("#preview2").attr("src", '../../' + services_data[$(this).attr('data-array')].service_file);
+        })
+
+        $('.service_delete').click(async function() {
+            console.log(services_data[$(this).attr('data-array')])
+            await axios.put("../../controllers/service_type/delete.php", {
+                id: services_data[$(this).attr('data-array')].service_type_id,
+            }).then(function(response) {
+                location.reload();
+            }).catch((err) => {
+                console.log(err.response.data)
+                console.log(err.response.status)
+            })
         })
 
     });

@@ -28,14 +28,21 @@
 
         <?php 
             if(isset($_SESSION['key'])){
-        ?>
+        ?>  
+                <div class="d-flex">
+                    <button onclick="location.href='account.php';" style="width: 200px;" type="button" class="d-flex btn btn-light fs-6 mx-1" data-bs-toggle="button" autocomplete="off">
+                        <div class="mx-auto" style="">
+                            โปรไฟล์
+                        </div>
+                    </button>
+                </div>
                 <div class="d-flex">
                     <button onclick="location.href='../../logout.php';" style="width: 200px;" type="button" class="d-flex btn btn-light fs-6 mx-1" data-bs-toggle="button" autocomplete="off">
                         <div class="mx-auto" style="">
                             ออกจากระบบ
                         </div>
                     </button>
-                </div>;
+                </div>
         <?php 
             } else {
         ?>
@@ -52,7 +59,7 @@
                     </div>
                     <span class=""><i class="fas fa-chevron-down"></i></span>
                 </button>
-            </div>';
+            </div>
         <?php 
             }
         ?>

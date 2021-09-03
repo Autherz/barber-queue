@@ -324,7 +324,7 @@
             hair_dressor += '<div class="d-flex flex-column service__content-container bg-white p-3">'
             hair_dressor +=     '<div class="d-flex">'
             hair_dressor +=         '<button class="service_edit m-auto service__button" style="background-color: transparent;" data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
-            hair_dressor +=         '<button class="m-auto service__button" style="background-color: transparent;">ลบ</button>'
+            hair_dressor +=         '<button class="service_delete m-auto service__button" style="background-color: transparent;" data-array='+ i + '>ลบ</button>'
             hair_dressor +=     '</div>'
             hair_dressor +=     '<div class="mx-auto my-3" style="width: 100px; height: 100px;">'
             hair_dressor +=         '<img class="w-100 h-100" src=../../' + hair_dressor_data[i].hair_dressor_image + ' alt="">'
@@ -356,6 +356,18 @@
             $('#editHairDressorName').val(hair_dressor_data[$(this).attr('data-array')].hair_dressor_name);
             $('#editHairDressorPhone').val(hair_dressor_data[$(this).attr('data-array')].hair_dressor_phone);
             $("#preview2").attr("src", '../../' + hair_dressor_data[$(this).attr('data-array')].hair_dressor_image);
+        })
+
+        $('.service_delete').click(async function() {
+            console.log(hair_dressor_data[$(this).attr('data-array')])
+            await axios.put("../../controllers/hair_dressor/delete.php", {
+                id: hair_dressor_data[$(this).attr('data-array')].hair_dressor_id,
+            }).then(function(response) {
+                location.reload();
+            }).catch((err) => {
+                console.log(err.response.data)
+                console.log(err.response.status)
+            })
         })
     });
     </script>

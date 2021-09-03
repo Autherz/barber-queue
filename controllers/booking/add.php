@@ -5,6 +5,7 @@
     require_once "../../vendor/autoload.php";
     require_once "../../database/connect.php";
     require_once "../../models/booking.php";
+    require_once "../../models/booking_detail.php";
     require_once "../../models/jwt.php";
 
     $data_token = Token::verify();
@@ -25,8 +26,20 @@
         '',
         0,
     );
+
     $booking_id = $booking->add();
     $_SESSION['booking_id'] = $booking_id;
+
+    $booking_detail = new BookingDetail(
+        $booking_id,
+        $hair_service_data['hair_service_id'],
+        $workingtime_hair_dressor_data['hair_dressor_id'],
+        $workingtime_hair_dressor_data['worktime_date'],
+        $workingtime_hair_dressor_data['start_time'],
+        $workingtime_hair_dressor_data['end_time'],
+        $hair_service_data['hair_service_price']
+    );
+    $booking_detail->add();
 
     header("Location: ../../page/customer/payment_method.php?booking_id=" . $booking_id);
     // http_response_code(200);

@@ -71,6 +71,10 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="mx-auto">
+                        <div class="d-flex px-5 my-2 text-danger" id="LoginError"></div>
+                    </div>
                 </div>
                 <div class="d-flex my-3">
                     <button id="login" class="mx-auto" type="button" style="background-color: transparent;">
@@ -101,6 +105,7 @@
                     location.href = 'page/customer/main.php'
                 }
             }).catch((err) => {
+                $('#LoginError').text(err.response.data.msg);
                 console.log(err.response.data)
                 console.log(err.response.status)
             })

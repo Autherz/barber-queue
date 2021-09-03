@@ -43,7 +43,7 @@
                     <div class="mx-auto my-4 px-4 py-2" style="border: 1px solid #aaa;">
                         สมัครสมาชิก
                     </div>
-                    <form id="form" action="controllers/customer/add.php" method="POST">
+                    <form id="form">
                         <div class="d-flex my-4">
                             <label  class="pe-4">ชื่อ - นามสกุล</label>
                             <div style="margin-left: auto;">
@@ -90,6 +90,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="mx-auto">
+                    <div class="d-flex px-5 my-2 text-danger" id="LoginError"></div>
+                </div>
                 <div class="d-flex my-3">
                     <button id="register" class="ms-auto me-5" type="button" style="background-color: transparent;">
                         ยืนยัน
@@ -98,16 +101,28 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $('#register').click(function(event) {
             event.preventDefault();
 
-            // validation username
-            // validation email
-            // validation password
+            axios.post("controllers/customer/add.php", {
+                name: $("#name").val(),
+                username: $("#username").val(),
+                email: $("#email").val(),
+                phone: $("#phone").val(),
+                address: $("#address").val(),
+                password: $("#password").val(),
+            }).then(function(response) {
+                location.href = "index.php"
+            }).catch((err) => {
+                $('#LoginError').text(err.response.data.msg);
+                console.log(err.response.data)
+                console.log(err.response.status)
+            })
 
-            $('#form').submit();
+            // $('#form').submit();
         })
     </script>
 </body>

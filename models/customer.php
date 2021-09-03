@@ -29,4 +29,30 @@
                 echo "Error: " . $e->getMessage();
             }
         }
+
+        public static function usernameExist($username) {
+            try {
+                $stmt = DB::get()->prepare("SELECT username FROM customers WHERE username = '$username'");
+                $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    return true;
+                }
+                return false;
+            } catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+        public static function emailExist($email) {
+            try {
+                $stmt = DB::get()->prepare("SELECT email FROM customers WHERE email = '$email'");
+                $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    return true;
+                }
+                return false;
+            } catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
     }

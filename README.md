@@ -20,7 +20,7 @@
 
 # ตั้งค่า database
 1. เช็คก่อนว่า server ทำงานได้ปกติโดยไปที่ localhost/barber-queue
-2. เข้าไปเซ็ตข้อมูลใน database/setting.inc.php ให้ตรงกับ database ที่เราสร้าง
+2. เข้าไปเซ็ตข้อมูลใน database/setting.inc.php ให้ตรงกับ database ที่เราสร้างหรือใช้ค่า default ตามที่ set ไว้อยู่แล้ว
 3. สร้าง schema โดยเรียก (ถ้าทำงานได้ปกติจะขึ้น Database created successfully)
     ```
     http://localhost/barber-queue/database/create_db.php

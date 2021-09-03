@@ -1,9 +1,5 @@
 <?php 
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $databasename = "barber";
+    include('setting.inc.php');
 
     $statements = [
         'CREATE TABLE customers(

@@ -1,7 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+include('setting.inc.php');
 
 try {
   $conn = new PDO("mysql:host=$servername", $username, $password);

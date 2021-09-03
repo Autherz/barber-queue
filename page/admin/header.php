@@ -7,12 +7,12 @@
                     หน้าแรก
                 </div>
             </a>
-            <div class="d-flex">
+            <a class="d-flex" href="../../about.php" style="color:black;text-decoration:none;"> 
                 <span class="px-2"><i class="fas fa-location"></i></span>
                 <div class="bg-light">
                     เกี่ยวกับเรา
                 </div>
-            </div>
+            </a>
             <a class="d-flex" href="../../contact.php" style="color:black;text-decoration:none;">
                 <span class="px-2"><i class="fas fa-envelope"></i></span>
                 <div class="bg-light">

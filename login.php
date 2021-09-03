@@ -93,9 +93,11 @@
                 username: $("#username").val(),
                 password: $("#password").val(),
             }).then(function(response) {
-                if (response.data.isAdmin) {
+                if (response.data.isAdmin == '1') {
+                    console.log('admin')
                     location.href = 'page/admin/main.php'
                 } else {
+                    console.log('customer')
                     location.href = 'page/customer/main.php'
                 }
             }).catch((err) => {

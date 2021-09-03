@@ -8,10 +8,10 @@
     require_once "../../models/jwt.php";
     $data_token = Token::verify();
     if (isset($data_token)) {
-        if ($data_token->admin) {
-        } else {
-            header('Location:../../index.php');
-        }
+        // if ($data_token->admin) {
+        // } else {
+        //     header('Location:../../index.php');
+        // }
     } else {
         header("Location:../../index.php");
     }
@@ -47,37 +47,18 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-md-center m-5 p-5">
-            <?php
-                $hairServices = HairService::getOne($_GET["service_type"]);
-                foreach($hairServices->fetchAll() as $k=>$v) {
-            ?>
-            <div class="col-sm-12 col-md-4 col-lg-3 my-2">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
-                    <div class="d-flex">
-                        <button class="m-auto service__button" style="background-color: transparent;">แก้ไข</button>
-                        <button class="m-auto service__button" style="background-color: transparent;">ลบ</button>
-                    </div>
-                    <div class="mx-auto my-3" style="width: 100px; height: 100px;">
-                        <img class="w-100 h-100" src=<?php echo '../../' . $v['hair_service_file']; ?> alt="">
-                    </div>
-                    <div class="mx-auto">
-                        <?php echo $v['hair_service_name']; ?>
-                    </div>
-                    <div class="mx-auto my-2">
-                        <button class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
-                    </div>
-                </div>
-            </div>
-            <?php
-                }
-            ?>
+        <div class="row justify-content-md-center m-5 p-5" id="hair_service_list">
         </div>
         <div class="d-flex ms-auto mt-auto me-2 mb-2">
             <div class="d-flex service__content-add bg-white">
                 <button class="m-auto service__button" style="background-color: transparent;width: 100px;" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
-                <button class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
+                <button onclick="location.href = 'hair_dressor.php'" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
             </div>
+        </div>
+        <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
+            <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button" style="background-color: white;">
+                กลับ
+            </button>
         </div>
     </div>
 
@@ -130,10 +111,62 @@
         </div>
     </div>
     </div>
+
+    <!-- EditModal -->
+    <div class="modal fade" id="editService" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขบริการ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-container">
+                    <input type="hidden" placeholder="id" id="editServiceId">
+                    <div class="d-flex px-5 my-2">
+                        <div class="my-auto">
+                            ชื่่อบริการ
+                        </div>
+                        <div class="ms-auto">
+                            <input type="text" placeholder="ชื่่อบริการ" id="editServiceName">
+                        </div>
+                    </div>
+                    <div class="d-flex px-5 my-2">
+                        <div class="my-auto">
+                            ราคา
+                        </div>
+                        <div class="ms-auto">
+                            <input type="number" placeholder="ราคา" id="editServicePrice">
+                        </div>
+                    </div>
+                    <div class="d-flex px-5 my-2">
+                        <div class="my-auto">
+                            อัปโหลดรูป
+                        </div>
+                        <div class="ms-auto">
+                            <button id="file-upload2" type="button" class="ml-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">
+                                <input class="visuallyhidden" type="file" id="files2" accept="image/*" />
+                                <span>อัปโหลด</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <img class="mx-auto mt-5 mb-2 img-thumbnail" id="preview2">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="editServiceButton" type="button" class="btn btn-primary">แก้ไข</button>
+            </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script>
+    $(document).ready(async function() {
         const params = new URLSearchParams(window.location.search)
 
         $('#addServiceButton').click(async function(event) {
@@ -196,5 +229,134 @@
         });
         $('.img-thumbnail[src=""]').hide();
         $('.img-thumbnail:not([src=""])').show();
+
+
+        // edit
+        $('#editServiceButton').click(async function(event) {
+            event.preventDefault();
+
+            var fd = new FormData();
+            var files = $("#files2")[0].files;
+            var file_name;
+            // Check file selected or not 
+            if (files.length > 0) {
+                fd.append('file', files[0]);
+                await axios.post("../../upload.php", fd, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(function (response) {
+                    if(response.data != 0) {
+                        console.log('uploaded')
+                        file_name = response.data ;
+                    } else {
+                        alert('file not uploaded')
+                    }
+                }).catch((err) => {
+                    console.log("error upload : ", err)
+                })
+            } else {
+                // alert("Please select a file.")
+                console.log($("#preview2").attr('src'))
+                file_name = $("#preview2").attr('src').replace('../../', '')
+            }
+            
+            axios.put("../../controllers/hair_service/update.php", {
+                id: $("#editServiceId").val(),
+                name: $("#editServiceName").val(),
+                price: $("#editServicePrice").val(),
+                // price: $("#addServicePrice").val(),
+                // type: $("#addSelectType").find(':selected').data('id'),
+                file: file_name
+            }).then(function(response) {
+                location.reload();
+            }).catch((err) => {
+                console.log(err.response.data)
+                console.log(err.response.status)
+            })
+            // // $('#form').submit();
+        })
+
+        $('input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+            $("#file").val(fileName);
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("preview").src = e.target.result;
+            };
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        });
+        $('.img-thumbnail[src=""]').hide();
+        $('.img-thumbnail:not([src=""])').show();
+
+        // for modal 
+
+        document.getElementById('file-upload2').addEventListener('click', event => {
+            console.log('click')
+            $('#files2').trigger('click');
+        })
+
+        $('input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("preview2").src = e.target.result;
+            };
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        });
+
+
+        var hair_services_data = [];
+        var hair_services = "";
+        await axios.get("../../controllers/hair_service/getById.php?id=" + params.get('service_type'))
+        .then(function(response) {
+            hair_services_data = response.data.data
+        }).catch((err) => {
+            console.log(err.response.data)
+            console.log(err.response.status)
+        })
+
+        for(let i = 0; i < hair_services_data.length; i++) {
+            hair_services += '<div class="col-sm-12 col-md-4 col-lg-3 my-2">'
+            hair_services += '<div class="d-flex flex-column service__content-container bg-white p-3">'
+            hair_services +=     '<div class="d-flex">'
+            hair_services +=         '<button class="service_edit m-auto service__button" style="background-color: transparent;" data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
+            hair_services +=         '<button class="m-auto service__button" style="background-color: transparent;">ลบ</button>'
+            hair_services +=     '</div>'
+            hair_services +=     '<div class="mx-auto my-3" style="width: 100px; height: 100px;">'
+            hair_services +=         '<img class="w-100 h-100" src=../../' + hair_services_data[i].hair_service_file + ' alt="">'
+            hair_services +=     '</div>'
+            hair_services +=     '<div class="mx-auto">'
+            hair_services +=         hair_services_data[i].hair_service_name
+            hair_services +=     '</div>'
+            hair_services +=     '<div class="mx-auto mt-4">'
+            hair_services +=        '' +  hair_services_data[i].hair_service_price + ' บาท'
+            hair_services +=     '</div>'
+            hair_services +=     '<div class="mx-auto my-2">'
+            hair_services +=         '<button class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>'
+            hair_services +=     '</div>'
+            hair_services +=  '</div>'
+            hair_services +=  '</div>'
+        }
+
+        $('#hair_service_list').html(
+            hair_services
+        )
+
+        $('.service_edit').click(function() {
+            console.log(hair_services_data[$(this).attr('data-array')])
+            $('#editServiceId').val(hair_services_data[$(this).attr('data-array')].hair_service_id);
+            $('#editServiceServiceTypeId').val(hair_services_data[$(this).attr('data-array')].service_type_id);
+            $('#editServiceName').val(hair_services_data[$(this).attr('data-array')].hair_service_name);
+            $('#editServicePrice').val(hair_services_data[$(this).attr('data-array')].hair_service_price);
+            $("#preview2").attr("src", '../../' + hair_services_data[$(this).attr('data-array')].hair_service_file);
+        })
+    });
     </script>
 </body>

@@ -6,7 +6,7 @@
         public $image;
         function __construct($name, $phone, $image) {
             $this->name = $name;
-            $this->price = $phone;
+            $this->phone = $phone;
             $this->image = $image;
         }
         public function add() {
@@ -26,6 +26,16 @@
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 return $stmt;
             } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+        public function update($id) {
+            try {
+                $stmt = DB::get()->prepare("UPDATE hair_dressor SET hair_dressor_name = '$this->name', hair_dressor_image = '$this->image', hair_dressor_phone = '$this->phone' WHERE hair_dressor_id = $id");
+                $stmt->execute();
+                // return DB::get()->lastInsertId();
+            } catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
         }

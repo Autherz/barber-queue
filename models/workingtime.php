@@ -34,4 +34,17 @@
                 echo "Error: " . $e->getMessage();
             }
         }
+
+        public static function getInner($id) {
+            try {
+                // $temp_time = date('Y-m-d', strtotime($date));
+                $stmt = DB::get()->prepare("SELECT * FROM hair_dressor_workingtime INNER JOIN hair_dressor ON hair_dressor_workingtime.hair_dressor_id = hair_dressor.hair_dressor_id WHERE working_time_id = $id");
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                return $stmt;
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+        
     }

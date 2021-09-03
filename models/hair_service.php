@@ -32,6 +32,17 @@
             }
         }
 
+        public static function getById($id) {
+            try {
+                $stmt = DB::get()->prepare("SELECT * FROM hair_service WHERE hair_service_id = $id");
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                return $stmt;
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
         public static function getOne($service_type_id) {
             try {
                 $stmt = DB::get()->prepare("SELECT * FROM hair_service WHERE service_type_id = $service_type_id");
@@ -39,6 +50,16 @@
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 return $stmt;
             } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+        public function update($id) {
+            try {
+                $stmt = DB::get()->prepare("UPDATE hair_service SET hair_service_name = '$this->name', hair_service_file = '$this->file', hair_service_price = '$this->price' WHERE hair_service_id = $id");
+                $stmt->execute();
+                // return DB::get()->lastInsertId();
+            } catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
             }
         }

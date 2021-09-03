@@ -26,4 +26,14 @@
                 echo "Error: " . $e->getMessage();
             }
         }
+
+        public function update($id) {
+            try {
+                $stmt = DB::get()->prepare("UPDATE service_type SET service_type_name = '$this->name', service_file = '$this->file' WHERE service_type_id = $id");
+                $stmt->execute();
+                // return DB::get()->lastInsertId();
+            } catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
     }

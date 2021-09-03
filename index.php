@@ -1,7 +1,20 @@
 <?php 
     session_start();
     session_id();
+    require_once 'vendor/autoload.php';
     require_once "database/connect.php";
+
+    require_once "models/jwt.php";
+    $data_token = Token::verify();
+    if (isset($data_token)) {
+        if ($data_token->admin) {
+            header('Location:page/admin/main.php');
+        } else {
+            header('Location:page/customer/main.php');
+        }
+    } else {
+    }
+
 ?>
 
 <!doctype html>

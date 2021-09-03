@@ -10,10 +10,10 @@
     require_once "../../models/jwt.php";
     $data_token = Token::verify();
     if (isset($data_token)) {
-        if ($data_token->admin) {
-        } else {
-            header('Location:../../index.php');
-        }
+        // if ($data_token->admin) {
+        // } else {
+        //     header('Location:../../index.php');
+        // }
     } else {
         header("Location:../../index.php");
     }

@@ -20,13 +20,10 @@
     <div class="d-flex flex-column min-vh-100">
         <?php require_once "header.php" ?>
         <div class="d-flex flex-column mx-auto  mt-4 register__content-container">
-            <div class="d-flex flex-wrap bg-white p-2">
-                <div class="mx-auto col-3 register__content-logo">
-                    <img class="h-100 w-100" src="assets/images/69like.jpg" alt="">
-                </div>
+            <div class="d-flex flex-wrap  p-2">
                 <div class="col-9 m-auto fw-bold">
                     <div class="d-flex flex-column">
-                        <div class="mx-auto">
+                        <div class="mx-auto py-5" style="font-size: 25px;">
                             สวัสดีผู้ใช้งานใหม่
                         </div>
                         <div class="mx-auto">
@@ -38,37 +35,37 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column mt-2 bg-white" >
+            <div class="d-flex flex-column mt-2 " >
                 <div class="d-flex flex-column mx-auto px-4 fw-bold">
-                    <div class="mx-auto my-4 px-4 py-2" style="border: 1px solid #aaa;">
+                    <div class="mx-auto my-4 px-4 py-2 header-content" style="font-size: 20px;">
                         สมัครสมาชิก
                     </div>
                     <form id="form">
                         <div class="d-flex my-4">
                             <label  class="pe-4">ชื่อ - นามสกุล</label>
                             <div style="margin-left: auto;">
-                                <input type="text" id="name" name="name">
+                                <input class="form-control" type="text" id="name" name="name">
                             </div>
                         </div>
 
                         <div class="d-flex my-4">
                             <label  class="pe-4">ชื่อใช้งาน</label>
                             <div style="margin-left: auto;">
-                                <input type="text" id="username" name="username">
+                                <input class="form-control" type="text" id="username" name="username">
                             </div>
                         </div>
 
                         <div class="d-flex my-4">
                             <label class="pe-4">E-mail</label>
                             <div style="margin-left: auto;">
-                                <input type="text" id="email" name="email">
+                                <input class="form-control" type="text" id="email" name="email">
                             </div>
                         </div>
 
                         <div class="d-flex my-4">
                             <label class="pe-3">เบอร์โทรศัพท์</label>
                             <div class="ms-auto">
-                                <input type="text" id="phone" name="phone">
+                                <input class="form-control" type="text" id="phone" name="phone">
                             </div>
                         </div>
 
@@ -85,7 +82,7 @@
                         <div class="d-flex my-4">
                             <label class="pe-3">รหัสผ่าน</label>
                             <div class="ms-auto">
-                                <input type="password" id="password" name="password">
+                                <input class="form-control" type="password" id="password" name="password">
                             </div>
                         </div>
                     </form>
@@ -94,7 +91,7 @@
                     <div class="d-flex px-5 my-2 text-danger" id="LoginError"></div>
                 </div>
                 <div class="d-flex my-3">
-                    <button id="register" class="ms-auto me-5" type="button" style="background-color: transparent;">
+                    <button id="register" class="mx-auto px-5 py-2" type="button">
                         ยืนยัน
                     </button>
                 </div>

@@ -33,13 +33,10 @@
 <div class="d-flex flex-column min-vh-100">
         <?php require_once "header.php" ?>
         <div class="d-flex flex-column mx-auto  mt-4 register__content-container">
-            <div class="d-flex flex-wrap bg-white p-2">
-                <div class="mx-auto col-3 register__content-logo">
-                    <img class="h-100 w-100" src="assets/images/69like.jpg" alt="">
-                </div>
+            <!-- <div class="d-flex flex-wrap  p-2">
                 <div class="col-9 m-auto fw-bold">
                     <div class="d-flex flex-column">
-                        <div class="mx-auto">
+                        <div class="mx-auto py-5" style="font-size: 25px;">
                             สวัสดีผู้ใช้งานใหม่
                         </div>
                         <div class="mx-auto">
@@ -50,24 +47,24 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex flex-column mt-2 bg-white" >
+            </div> -->
+            <div class="d-flex flex-column mt-2 " >
                 <div class="d-flex flex-column mx-auto px-4 fw-bold">
-                    <div class="mx-auto my-4 px-4 py-2" style="border: 1px solid #aaa;">
+                    <div class="mx-auto my-4 px-4 py-2 header-content" style="font-size: 20px;">
                         เข้าสู่ระบบ
                     </div>
                     <form id="form" action="#" method="POST">
                         <div class="d-flex my-4">
-                            <label  class="pe-4">ชื่อ - นามสกุล</label>
+                            <label  class="pe-4 my-auto">ชื่อ - นามสกุล</label>
                             <div style="margin-left: auto;">
-                                <input type="text" id="username" name="username">
+                                <input class="form-control" type="text" id="username" name="username">
                             </div>
                         </div>
 
                         <div class="d-flex my-4">
-                            <label  class="pe-4">รหัสผ่าน</label>
+                            <label  class="pe-4 my-auto">รหัสผ่าน</label>
                             <div style="margin-left: auto;">
-                                <input type="password" id="password" name="password">
+                                <input class="form-control" type="password" id="password" name="password">
                             </div>
                         </div>
                     </form>
@@ -77,7 +74,7 @@
                     </div>
                 </div>
                 <div class="d-flex my-3">
-                    <button id="login" class="mx-auto" type="button" style="background-color: transparent;">
+                    <button id="login" class="mx-auto px-2 py-1" type="button">
                         ลงชื่อใช้งาน
                     </button>
                 </div>

@@ -20,13 +20,10 @@
     <div class="d-flex flex-column min-vh-100">
         <?php require_once "header.php" ?>
         <div class="d-flex flex-column mx-auto  mt-4 register__content-container">
-            <div class="d-flex flex-wrap bg-white p-2">
-                <div class="mx-auto col-3 register__content-logo">
-                    <img class="h-100 w-100" src="assets/images/69like.jpg" alt="">
-                </div>
+            <div class="d-flex flex-wrap  p-2">
                 <div class="col-9 m-auto fw-bold">
                     <div class="d-flex flex-column">
-                        <div class="mx-auto">
+                        <div class="mx-auto py-5" style="font-size: 25px;">
                             ต้องการติดต่อเรา Like69 ?
                         </div>
                         <div class="mx-auto">
@@ -35,29 +32,29 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column mt-2 bg-white" >
+            <div class="d-flex flex-column mt-2 " >
                 <div class="d-flex flex-column mx-auto px-4 fw-bold">
-                    <div class="mx-auto my-4 px-4 py-2" style="border: 1px solid #aaa;">
+                    <div class="mx-auto my-4 px-4 py-2 header-content" style="font-size: 20px;">
                         แบบฟอร์มติดต่อ
                     </div>
                     <form id="form" action="controllers/customer/add.php" method="POST" style="width: 400px;">
                         <div class="d-flex my-4 w-100">
-                                <input class="w-100" type="text" id="name" name="name" placeholder="ชื่อ-นามสกุล">
+                                <input class="w-100 form-control" type="text" id="name" name="name" placeholder="ชื่อ-นามสกุล">
                         </div>
 
                         <div class="d-flex my-4 w-100">
-                                <input class="w-100"  type="text" id="email" name="email" placeholder="E-mail">
-                        </div>
-
-                        <div class="d-flex my-4 w-100">
-                            
-                                <input class="w-100" type="text" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
-                            
+                                <input class="w-100 form-control"  type="text" id="email" name="email" placeholder="E-mail">
                         </div>
 
                         <div class="d-flex my-4 w-100">
                             
-                                <input class="w-100" type="text" id="title" name="title" placeholder="หัวข้อเรื่อง">
+                                <input class="w-100 form-control" type="text" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
+                            
+                        </div>
+
+                        <div class="d-flex my-4 w-100">
+                            
+                                <input class="w-100 form-control" type="text" id="title" name="title" placeholder="หัวข้อเรื่อง">
                             
                         </div>
 
@@ -71,7 +68,7 @@
                     </form>
                 </div>
                 <div class="d-flex my-3">
-                    <button id="register" class="ms-auto me-5" type="button" style="background-color: transparent;">
+                    <button id="register" class="mx-auto px-5 py-2" type="button">
                         ยืนยัน
                     </button>
                 </div>

@@ -37,13 +37,11 @@
     <div class="d-flex flex-column min-vh-100 position-relative">
         <?php require_once "header.php" ?>
         <div class="d-flex flex-column mx-auto  mt-4 register__content-container">
-            <div class="d-flex flex-wrap bg-white p-2">
-                <div class="mx-auto col-3 register__content-logo">
-                    <img class="h-100 w-100" src="../../assets/images/69like.jpg" alt="">
-                </div>
+            <div class="d-flex flex-wrap  p-2">
+
                 <div class="col-9 m-auto fw-bold">
                     <div class="d-flex flex-column">
-                        <div class="mx-auto">
+                        <div class="mx-auto py-5" style="font-size: 25px;">
                             โปรไฟล์
                         </div>
                     </div>
@@ -126,7 +124,7 @@
             </tbody>
         </table>
         <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
-            <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button" style="background-color: white;">
+            <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button">
                 กลับ
             </button>
         </div>

@@ -39,8 +39,8 @@
                 <img class="home__content-logo" src="assets/images/69like.jpg" alt="Logo" lazy>
             </div>
 
-            <div class=" mx-auto mb-auto">
-                <div class="p-5 bg-white" style="font-size: 28px;">
+            <div class="mx-auto mb-auto">
+                <div class="p-5 bg-white" style="font-size: 28px;border-radius: 30px;">
                     เลือกทรงผมที่ใช่ สไตล์ที่ชอบในแบบของคุณ
                 </div>
             </div>

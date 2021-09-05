@@ -34,13 +34,11 @@
     <div class="d-flex flex-column min-vh-100 position-relative">
         <?php require_once "header.php" ?>
         <div class="d-flex flex-column mx-auto  mt-4 register__content-container">
-            <div class="d-flex flex-wrap bg-white p-2">
-                <div class="mx-auto col-3 register__content-logo">
-                    <img class="h-100 w-100" src="../../assets/images/69like.jpg" alt="">
-                </div>
+            <div class="d-flex flex-wrap  p-2">
+
                 <div class="col-9 m-auto fw-bold">
                     <div class="d-flex flex-column">
-                        <div class="mx-auto">
+                        <div class="mx-auto py-5" style="font-size: 25px;">
                             <?php echo $_GET["service_type_name"]; ?>
                         </div>
                     </div>
@@ -56,7 +54,7 @@
             </div>
         </div>
         <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
-            <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button" style="background-color: white;">
+            <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button">
                 กลับ
             </button>
         </div>
@@ -65,7 +63,7 @@
     <!-- Modal -->
     <div class="modal fade" id="addService" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content modal__container">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">เพิ่มบริการ</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -74,10 +72,10 @@
             <div class="modal-container">
                 <div class="d-flex px-5 my-2">
                     <div class="my-auto">
-                        ชื่่อบริการ
+                        ชื่อบริการ
                     </div>
                     <div class="ms-auto">
-                        <input type="text" placeholder="ชื่่อบริการ" id="addServiceName">
+                        <input class="form-control" type="text" placeholder="ชื่อบริการ" id="addServiceName">
                     </div>
                 </div>
                 <div class="d-flex px-5 my-2">
@@ -85,7 +83,7 @@
                         ราคา
                     </div>
                     <div class="ms-auto">
-                        <input type="number" placeholder="ราคา" id="addServicePrice">
+                        <input class="form-control" type="number" placeholder="ราคา" id="addServicePrice">
                     </div>
                 </div>
                 <div class="d-flex px-5 my-2">
@@ -93,7 +91,7 @@
                         อัปโหลดรูป
                     </div>
                     <div class="ms-auto">
-                        <button id="file-upload" type="button" class="ml-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">
+                        <button id="file-upload" type="button" class="ml-auto my-auto py-2 px-4 modal__upload-button" >
                             <input class="visuallyhidden" type="file" id="files" accept="image/*" />
                             <span>อัปโหลด</span>
                         </button>
@@ -105,8 +103,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button id="addServiceButton" type="button" class="btn btn-primary">เพิ่ม</button>
+            <button type="button" class="close-button" data-bs-dismiss="modal">Close</button>
+            <button id="addServiceButton" type="button" class="px-3">เพิ่ม</button>
         </div>
         </div>
     </div>

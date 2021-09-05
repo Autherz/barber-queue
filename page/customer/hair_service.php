@@ -50,7 +50,7 @@
                 foreach($hairServices->fetchAll() as $k=>$v) {
             ?>
             <div class="col-sm-12 col-md-4 col-lg-3 my-2">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
+                <div class="d-flex flex-column service__content-container p-3">
                     <div class="mx-auto fw-bold">
                         <?php echo $v['hair_service_name']; ?>
                     </div>

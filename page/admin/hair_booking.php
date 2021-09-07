@@ -52,13 +52,16 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex my-5">
+            <button class="ms-auto me-5 service__button-add" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มคิว</button>
+        </div>
         <div class="m-5 bg-white" style="width: 400px;">
             <div class="d-flex bg-white">
                 <img src=<?php echo '../../' . $workingtime_hair_dressor_data['hair_dressor_image'] ?> alt="">
                 <div class="bg-white m-auto"><?php echo $_GET["hair_dressor_name"] ?></div>
             </div>
         </div>
-        <table class="table caption-top bg-white">
+        <table class="table caption-top bg-white" style="overflow: auto;">
             <caption>List of users</caption>
             <thead >
                 <tr>
@@ -97,12 +100,6 @@
 
             </tbody>
         </table>
-        <div class="d-flex ms-auto mt-auto me-2 mb-2">
-            <div class="d-flex service__content-add bg-white">
-                <button class="m-auto service__button" style="background-color: transparent;width: 100px;" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
-                <button onclick="location.href='main.php'" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
-            </div>
-        </div>
         <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
             <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button">
                 กลับ

@@ -45,13 +45,10 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-md-center m-5 p-5" id="hair_service_list">
+        <div class="d-flex my-5">
+            <button class="ms-auto me-5 service__button-add" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
         </div>
-        <div class="d-flex ms-auto mt-auto me-2 mb-2">
-            <div class="d-flex service__content-add bg-white">
-                <button class="m-auto service__button" style="background-color: transparent;width: 100px;" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
-                <button onclick="location.href = 'hair_dressor.php'" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
-            </div>
+        <div class="row justify-content-md-center m-5 p-5" id="hair_service_list">
         </div>
         <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
             <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button">
@@ -322,7 +319,7 @@
 
         for(let i = 0; i < hair_services_data.length; i++) {
             hair_services += '<div class="col-sm-12 col-md-4 col-lg-3 my-2">'
-            hair_services += '<div class="d-flex flex-column service__content-container bg-white p-3">'
+            hair_services += '<div class="d-flex flex-column service__content-container p-3">'
             hair_services +=     '<div class="d-flex">'
             hair_services +=         '<button class="service_edit m-auto service__button" style="background-color: transparent;" data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
             hair_services +=         '<button class="service_delete m-auto service__button" style="background-color: transparent;" data-array='+ i + '>ลบ</button>'

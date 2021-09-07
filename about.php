@@ -20,7 +20,7 @@
     <div class="d-flex flex-column min-vh-100">
         <?php require_once "header.php" ?>
         <div class="d-flex">
-            <div class="d-flex flex-column mx-auto service__content-container bg-white p-3" style="width: 500px;">
+            <div class="d-flex flex-column mx-auto service__content-container p-3" style="width: 500px;">
                 <div class="mx-auto">
                     ถ้าคุณต้องการเสริมบุคลิกให้ดูดี ไว้ใจเรา ให้เราเป็นคนดูแล :)
                 </div>

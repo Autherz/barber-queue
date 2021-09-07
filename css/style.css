@@ -17,6 +17,31 @@ body {
     border-top: 1px solid #c90202;
 } */
 
+.booking-button {
+    color: #000;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 2px solid #c90202;
+    transition: all 0.3s;
+}
+
+.booking-button:hover {
+    color: #fff;
+    background-color: #c90202;
+    border-radius: 20px;
+    border: 2px solid #c90202;
+    transition: all 0.3s;
+}
+
+.booking-button:disabled,
+.booking-button[disabled]{
+    color: rgb(112, 111, 111);
+    background-color: #fff;
+    border-radius: 20px;
+    border: 2px solid rgb(112, 111, 111);
+}
+
+
 .close-button {
     background-color: transparent;
     border: none;
@@ -119,6 +144,36 @@ body {
     border-radius: 30px;
 }
 
+.slide-in {
+    animation: slide-in 2s forwards;
+    -webkit-animation: slide-in 2s forwards;
+}
+
+.fade-in {
+    animation: fade-in 2s;
+    -webkit-animation: fade-in 2s;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+
+
 .register__content-logo {
     width: 150px;
     height: 150px;
@@ -159,7 +214,8 @@ body {
     color: #fff;
 }
 
-.service__button {
+
+#bookingButton {
     width: 100px;
     background-color: #1A1A1A;
     color: #fff;
@@ -168,7 +224,43 @@ body {
     transition: all 0.2s;
 }
 
+#bookingButton:hover {
+    width: 100px;
+    background-color: rgb(61, 59, 59);
+    color: #fff;
+    border: 2px solid #c90202;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.service__button {
+    width: 100px;
+    background-color: #2B2A2A;
+    color: #fff;
+    border: 2px solid #c90202;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
 .service__button:hover {
+    width: 100px;
+    background-color: rgb(61, 59, 59);
+    color: #fff;
+    border: 2px solid #c90202;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.service__button-add {
+    width: 100px;
+    background-color: #1A1A1A;
+    color: #fff;
+    border: 2px solid #c90202;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.service__button-add:hover {
     width: 100px;
     background-color: rgb(61, 59, 59);
     color: #fff;

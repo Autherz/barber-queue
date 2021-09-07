@@ -48,7 +48,7 @@
         </div>
         <div class="row justify-content-md-center m-5 p-5">
             <div class="col-sm-12 col-md-4 col-lg-3 my-2" style="width: 500px;">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
+                <div class="d-flex flex-column service__content-container p-3">
                     <div class="d-flex mx-auto" style="border: 1px solid #aaa; width: 200px; ">
                         <div class="mx-auto px-3 py-4">
                             <?php echo $_GET['booking_id'] ?>

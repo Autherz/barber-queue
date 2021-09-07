@@ -45,13 +45,10 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-md-center m-5 p-5" id="hair_dressor_list">
+        <div class="d-flex my-5">
+            <button class="ms-auto me-5 service__button-add" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มช่าง</button>
         </div>
-        <div class="d-flex ms-auto mt-auto me-2 mb-2">
-            <div class="d-flex service__content-add bg-white">
-                <button class="m-auto service__button" style="background-color: transparent;width: 100px;" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
-                <button class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
-            </div>
+        <div class="row justify-content-md-center m-5 p-5" id="hair_dressor_list">
         </div>
         <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
             <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button">
@@ -63,9 +60,9 @@
     <!-- Modal -->
     <div class="modal fade" id="addService" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content modal__container">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">เพิ่มบริการ</h5>
+            <h5 class="modal-title" id="exampleModalLabel">เพิ่มช่าง</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -75,7 +72,7 @@
                         ชื่อช่างตัดผม
                     </div>
                     <div class="ms-auto">
-                        <input type="text" placeholder="ชื่่อบริการ" id="addHairDressorName">
+                        <input class="form-control" type="text" placeholder="ชื่่อช่าง" id="addHairDressorName">
                     </div>
                 </div>
                 <div class="d-flex px-5 my-2">
@@ -83,7 +80,7 @@
                         เบอร์โทรศัพท์
                     </div>
                     <div class="ms-auto">
-                        <input type="text" placeholder="เบอร์โทรศัพท์" id="addHairDressorPhone">
+                        <input class="form-control" type="text" placeholder="เบอร์โทรศัพท์" id="addHairDressorPhone">
                     </div>
                 </div>
                 <div class="d-flex px-5 my-2">
@@ -91,7 +88,7 @@
                         อัปโหลดรูป
                     </div>
                     <div class="ms-auto">
-                        <button id="file-upload" type="button" class="ml-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">
+                        <button id="file-upload" type="button" class="ml-auto my-auto py-2 px-4 modal__upload-button">
                             <input class="visuallyhidden" type="file" id="files" accept="image/*" />
                             <span>อัปโหลด</span>
                         </button>
@@ -113,7 +110,7 @@
     <!-- Edit Modal -->
     <div class="modal fade" id="editService" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content modal__container">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">แก้ไข</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -126,7 +123,7 @@
                         ชื่อช่างตัดผม
                     </div>
                     <div class="ms-auto">
-                        <input type="text" placeholder="ชื่่อบริการ" id="editHairDressorName">
+                        <input class="form-control" type="text" placeholder="ชื่่อบริการ" id="editHairDressorName">
                     </div>
                 </div>
                 <div class="d-flex px-5 my-2">
@@ -134,7 +131,7 @@
                         เบอร์โทรศัพท์
                     </div>
                     <div class="ms-auto">
-                        <input type="text" placeholder="เบอร์โทรศัพท์" id="editHairDressorPhone">
+                        <input class="form-control" type="text" placeholder="เบอร์โทรศัพท์" id="editHairDressorPhone">
                     </div>
                 </div>
                 <div class="d-flex px-5 my-2">
@@ -142,7 +139,7 @@
                         อัปโหลดรูป
                     </div>
                     <div class="ms-auto">
-                        <button id="file-upload2" type="button" class="ml-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">
+                        <button id="file-upload2" type="button" class="ml-auto my-auto py-2 px-4 modal__upload-button">
                             <input class="visuallyhidden" type="file" id="files2" accept="image/*" />
                             <span>อัปโหลด</span>
                         </button>
@@ -319,10 +316,10 @@
         for(let i = 0; i < hair_dressor_data.length; i++) {
 
             hair_dressor += '<div class="col-sm-12 col-md-4 col-lg-3 my-2">'
-            hair_dressor += '<div class="d-flex flex-column service__content-container bg-white p-3">'
+            hair_dressor += '<div class="d-flex flex-column service__content-container p-3">'
             hair_dressor +=     '<div class="d-flex">'
-            hair_dressor +=         '<button class="service_edit m-auto service__button" style="background-color: transparent;" data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
-            hair_dressor +=         '<button class="service_delete m-auto service__button" style="background-color: transparent;" data-array='+ i + '>ลบ</button>'
+            hair_dressor +=         '<button class="service_edit m-auto service__button"  data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
+            hair_dressor +=         '<button class="service_delete m-auto service__button"  data-array='+ i + '>ลบ</button>'
             hair_dressor +=     '</div>'
             hair_dressor +=     '<div class="mx-auto my-3" style="width: 100px; height: 100px;">'
             hair_dressor +=         '<img class="w-100 h-100" src=../../' + hair_dressor_data[i].hair_dressor_image + ' alt="">'
@@ -337,7 +334,7 @@
             hair_dressor +=        '</div>'
             hair_dressor +=     '</div>'
             hair_dressor +=     '<div class="mx-auto my-2">'
-            hair_dressor +=         '<button onclick="location.href=\'hair_booking.php?hair_dressor_id=' +  hair_dressor_data[i].hair_dressor_id + '&hair_dressor_name=' + hair_dressor_data[i].hair_dressor_name + '\'" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>'
+            hair_dressor +=         '<button onclick="location.href=\'hair_booking.php?hair_dressor_id=' +  hair_dressor_data[i].hair_dressor_id + '&hair_dressor_name=' + hair_dressor_data[i].hair_dressor_name + '\'" class="m-auto service__button" >ยืนยัน</button>'
             hair_dressor +=     '</div>'
             hair_dressor +=  '</div>'
             hair_dressor +=  '</div>'

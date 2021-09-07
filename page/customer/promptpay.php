@@ -48,7 +48,7 @@
         </div>
         <div class="row justify-content-md-center m-5 p-5">
             <div class="col-sm-12 col-md-4 col-lg-3 my-2" style="width: 500px;">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
+                <div class="d-flex flex-column service__content-container p-3">
                     <div class="d-flex px-5 my-2">
                         <div class="mx-auto">
                             <button id="file-upload" type="button" class="mx-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">

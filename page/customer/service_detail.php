@@ -58,7 +58,7 @@
         </div>
         <div class="row justify-content-md-center m-5 p-5">
             <div class="col-sm-12 col-md-4 col-lg-3 my-2">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
+                <div class="d-flex flex-column service__content-container p-3">
                     <div class="p-4" style="border: 1px solid #aaa;">
                         <div class="">
                             <?php echo $data_token->username ?>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="mx-auto mb-2 mt-4">
-                        <button onclick=<?php echo 'location.href="../../controllers/booking/add.php' . '"'; ?> id="bookingButton"  class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
+                        <button onclick=<?php echo 'location.href="../../controllers/booking/add.php' . '"'; ?> id="bookingButton"  class="m-auto service__button">ยืนยัน</button>
                     </div>
                 </div>
             </div>

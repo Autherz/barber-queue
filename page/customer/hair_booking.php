@@ -5,7 +5,8 @@
     require_once "../../database/connect.php";
     require_once "../../models/hair_dressor.php";
 
-
+    $stmt = HairDressor::getById($_GET['hair_dressor_id']);
+    $hairDressor = $stmt->fetch();
     // #### Verify
     require_once "../../models/jwt.php";
     $data_token = Token::verify();
@@ -48,14 +49,17 @@
                 </div>
             </div>
         </div>
-        <div class="m-5" style="width: 100px;">
-            <div class="bg-white"><?php echo $_GET["hair_dressor_name"] ?></div>
+        <div class="d-flex m-5 bg-white" style="width: 350px;">
+            <div>
+                <img src=<?php echo '../../' . $hairDressor['hair_dressor_image']; ?> alt="">
+            </div>
+            <div class="bg-white my-auto mx-auto"><?php echo $_GET["hair_dressor_name"] ?></div>
         </div>
         <table class="table caption-top bg-white">
-            <caption>List of users</caption>
+            <caption>List of hair dressor worktime</caption>
             <thead >
                 <tr>
-                <th scope="col">Date </th>
+                <th scope="col">วันที่ </th>
                 <th scope="col">09.00 - 10.00</th>
                 <th scope="col">10.00 - 11.00</th>
                 <th scope="col">11.00 - 12.00</th>
@@ -286,12 +290,12 @@
                 var tik = false
                 for(let k = 0; k < booking_data.length; k++) {
                     if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ว่าง') {
-                        booking += '<td><button class="w-100 booking-button" style="background-color: transparent;" data-array=' + k +'>' + 'จอง' + '</button></td>'
+                        booking += '<td><button class="w-100 booking-button"  data-array=' + k +'>' + 'จอง' + '</button></td>'
                         tik = true
                     }
 
                     if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ไม่ว่าง') {
-                        booking += '<td><button class="w-100" style="background-color: transparent;" data-array=' + k + ' disabled>' + 'ไม่ว่าง' + '</button></td>'
+                        booking += '<td><button class="w-100 booking-button" data-array=' + k + ' disabled>' + 'ไม่ว่าง' + '</button></td>'
                         tik = true
                     }
                 }

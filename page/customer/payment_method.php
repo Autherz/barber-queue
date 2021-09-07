@@ -48,24 +48,24 @@
         </div>
         <div class="row justify-content-md-center m-5 p-5">
             <div class="col-sm-12 col-md-4 col-lg-3 my-2">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
+                <div class="d-flex flex-column service__content-container p-3">
                     <div class="mx-auto my-3" style="width: 200px; height: 150px;">
                         <img class="w-100 h-100" src="../../assets/images/Promptpay.jpg" alt="">
                     </div>
     
                     <div class="mx-auto my-2">
-                        <button onclick=<?php echo 'location.href="promptpay.php?booking_id='. $_GET['booking_id'] . '"';?>  class="m-auto service__button" style="background-color: transparent;">พร้อมเพย์</button>
+                        <button onclick=<?php echo 'location.href="promptpay.php?booking_id='. $_GET['booking_id'] . '"';?>  class="m-auto service__button" >พร้อมเพย์</button>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-3 my-2">
-                <div class="d-flex flex-column service__content-container bg-white p-3">
+                <div class="d-flex flex-column service__content-container p-3">
                     <div class="mx-auto my-3" style="width: 200px; height: 150px;">
                         <img class="w-100 h-100 bg-white" src="../../assets/images/cash-pay.jpg" alt="">
                     </div>
        
                     <div class="mx-auto my-2">
-                        <button onclick=<?php echo 'location.href="cash.php?booking_id='. $_GET['booking_id'] . '"';?>  class="m-auto service__button" style="background-color: transparent; width: 130px;">เก็บเงินปลายทาง</button>
+                        <button onclick=<?php echo 'location.href="cash.php?booking_id='. $_GET['booking_id'] . '"';?>  class="m-auto service__button" style="width: 130px;">เก็บเงินปลายทาง</button>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
                 $options = [
                     'cost' => 12,
                 ];
-                $this->password = password_hash($this->password, PASSWORD_BCRYPT, $options);
+                // $this->password = password_hash($this->password, PASSWORD_BCRYPT, $options);
                 $stmt = DB::get()->prepare("INSERT INTO customers VALUES (NULL, '$this->name', '$this->username', '$this->email','$this->phone','$this->address', '$this->password', false);");
                 $stmt->execute();
             } catch(PDOException $e){
@@ -46,6 +46,19 @@
         public static function emailExist($email) {
             try {
                 $stmt = DB::get()->prepare("SELECT email FROM customers WHERE email = '$email'");
+                $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    return true;
+                }
+                return false;
+            } catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+        public static function phoneExist($phone) {
+            try {
+                $stmt = DB::get()->prepare("SELECT phone FROM customers WHERE phone = '$phone'");
                 $stmt->execute();
                 if ($stmt->rowCount() > 0) {
                     return true;

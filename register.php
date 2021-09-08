@@ -65,7 +65,7 @@
                         <div class="d-flex my-4">
                             <label class="pe-3">เบอร์โทรศัพท์</label>
                             <div class="ms-auto">
-                                <input class="form-control" type="text" id="phone" name="phone">
+                                <input class="form-control" type="tel" id="phone" name="phone">
                             </div>
                         </div>
 

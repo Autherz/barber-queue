@@ -57,8 +57,9 @@
 
     $date = new DateTime();
     if($row) {
-        if (password_verify($password, $row["password"])) {
-
+        // ####compare bcrypt
+        // if (password_verify($password, $row["password"])) {
+        if ($password == $row["password"]) {
             $payload = array(
                 "customer_id" => $row["customer_id"],
                 "name" => $row["name"],
@@ -85,13 +86,13 @@
             http_response_code(400);
             echo json_encode([
                 'status' => 'error',
-                'msg' => 'username or password is incorrent!'
+                'msg' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!'
             ]);
         }
     } else {
         http_response_code(400);
         echo json_encode([
             'status' => 'error',
-            'msg' => 'username or password is incorrent!'
+            'msg' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!'
         ]);
     }

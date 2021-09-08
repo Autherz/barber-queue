@@ -57,5 +57,18 @@
                 echo "Error: " . $e->getMessage();
             }
         }
+
+        public static function bookingExist($date, $start, $end) {
+            try {
+                $stmt = DB::get()->prepare("SELECT * FROM hair_dressor_workingtime WHERE worktime_date = '$date' AND start_time = '$start' AND end_time = '$end' ");
+                $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    return true;
+                }
+                return false;
+            } catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
         
     }

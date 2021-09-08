@@ -89,7 +89,7 @@
         http_response_code(400);
         echo json_encode([
             'status' => 'error',
-            'msg' => 'โปรดกรอกโทรศัพท์ให้ถูกต้องa'
+            'msg' => 'โปรดกรอกโทรศัพท์ให้ถูกต้อง'
         ]);
         return;
     }

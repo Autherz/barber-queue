@@ -282,7 +282,7 @@
             services += '<div class="d-flex flex-column service__content-container p-3">'
             services +=     '<div class="d-flex">'
             services +=         '<button class="service_edit m-auto service__button"  data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
-            services +=         '<button class="service_delete m-auto service__button"  data-array='+ i + '>ลบ</button>'
+            // services +=         '<button class="service_delete m-auto service__button"  data-array='+ i + '>ลบ</button>'
             services +=     '</div>'
             services +=     '<div class="mx-auto my-3" style="width: 100px; height: 100px;">'
             services +=         '<img class="w-100 h-100" src=../../' + services_data[i].service_file + ' alt="">'

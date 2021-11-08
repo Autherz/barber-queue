@@ -97,7 +97,7 @@
                         </td>
                         <td>
                             <?php 
-                                if( $v['booking_status'] == 'ยังไม่ชำระ') {
+                                if( $v['booking_status'] == 'รอดำาเนินการ') {
                                     echo '<button class="btn btn-danger booking-button" type="button" data-bs-toggle="modal" data-bs-target="#editService" data-id='. $v['booking_id']  .' data-status=' . $v['booking_status'] . '>' . $v['booking_status'] . '</button>';
                                 } else {
                                     echo '<button class="btn btn-success booking-button" type="button" data-bs-toggle="modal" data-bs-target="#editService" data-id='. $v['booking_id']  .' data-status=' . $v['booking_status'] . ' disabled>' . $v['booking_status'] . '</button>';
@@ -201,8 +201,8 @@
                     <div class="ms-auto">
                         <select class="" aria-label="Default select example" id="status">
                             
-                            <option value="ยังไม่ชำระ">ยังไม่ชำระ</option>
-                            <option value="ชำระแล้ว">ชำระแล้ว</option>
+                            <option value="รอดำาเนินการ">รอดำาเนินการ</option>
+                            <option value="ดำาเนินการเสร็จสิ้น">ดำาเนินการเสร็จสิ้น</option>
                         </select>
                     </div>
                 </div>

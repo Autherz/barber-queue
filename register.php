@@ -69,7 +69,7 @@
                             </div>
                         </div>
 
-                        <div class="d-flex my-4">
+                        <!-- <div class="d-flex my-4">
                             <label class="pe-3">ที่อยู่ปัจจุบัน</label>
                             <div class="ms-auto">
                                 <div class="form-floating">
@@ -77,7 +77,7 @@
                                     <label for="floatingTextarea2">ที่อยู่</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="d-flex my-4">
                             <label class="pe-3">รหัสผ่าน</label>

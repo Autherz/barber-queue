@@ -109,7 +109,7 @@
                         </td>
                         <td>
                             <?php 
-                                if( $v['booking_status'] == 'ยังไม่ชำระ') {
+                                if( $v['booking_status'] == 'รอดำาเนินการ') {
                                     echo '<button class="btn btn-danger booking-button" type="button"  data-id='. $v['booking_id']  .' data-status=' . $v['booking_status'] . '>' . $v['booking_status'] . '</button>';
                                 } else {
                                     echo '<button class="btn btn-success booking-button" type="button" data-id='. $v['booking_id']  .' data-status=' . $v['booking_status'] . ' disabled>' . $v['booking_status'] . '</button>';

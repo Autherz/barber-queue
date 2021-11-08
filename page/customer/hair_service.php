@@ -61,7 +61,7 @@
                         <?php echo $v['hair_service_price']; ?> บาท
                     </div>
                     <div class="mx-auto my-2">
-                        <button onclick=<?php echo 'location.href="hair_dressor.php?hair_service_id=' . $v['hair_service_id'] .  '"'; ?> class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
+                        <button data-array=<?php echo $v['hair_service_id']; ?> class="m-auto service__button service__button-x" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
                     </div>
                 </div>
             </div>
@@ -77,103 +77,48 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="addService" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">เพิ่มบริการ</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="modal-container">
-                <div class="d-flex px-5 my-2">
-                    <div class="my-auto">
-                        ชื่่อบริการ
+    <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- <div class="modal-header"> -->
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">การยืนยัน</h5> -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <!-- </div> -->
+                <div class="modal-body" style="background-color: #1A1A1A;">
+                    <div class="modal-container">
+                        <div class="d-flex text-white text-center" style="font-size: 24px;">
+                            <div class="mx-auto my-5">
+                                คุณต้องการยืนยันการทำรายการหรือไม่?
+                            </div>
+                        </div>
+                        <div class="d-flex mx-auto">
+                            <div type="button" data-bs-dismiss="modal" class="ms-auto my-auto me-2 text-white">ยกเลิก</div>
+                            <button id="addServiceButton" type="button" class="btn btn-primary me-auto ms-2">ยืนยัน</button>
+                        </div>
                     </div>
-                    <div class="ms-auto">
-                        <input type="text" placeholder="ชื่่อบริการ" id="addServiceName">
-                    </div>
-                </div>
-                <div class="d-flex px-5 my-2">
-                    <div class="my-auto">
-                        ราคา
-                    </div>
-                    <div class="ms-auto">
-                        <input type="number" placeholder="ราคา" id="addServicePrice">
-                    </div>
-                </div>
-                <div class="d-flex px-5 my-2">
-                    <div class="my-auto">
-                        อัปโหลดรูป
-                    </div>
-                    <div class="ms-auto">
-                        <button id="file-upload" type="button" class="ml-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">
-                            <input class="visuallyhidden" type="file" id="files" accept="image/*" />
-                            <span>อัปโหลด</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <img class="mx-auto mt-5 mb-2 img-thumbnail" id="preview">
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button id="addServiceButton" type="button" class="btn btn-primary">เพิ่ม</button>
-        </div>
-        </div>
     </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script>
         const params = new URLSearchParams(window.location.search)
         
-        $('#backButton').click(function() {
-            location.href = 'main.php'
+        $('.service__button-x').click(async function(event) {
+            var service = $(this).data('array');
+            console.log(service)
+            if (service !== undefined) {
+                document.getElementById("addServiceButton").addEventListener('click', function(event) {
+                    window.location.href = 'main.php?hair_service_id=' + service;
+                });
+            }
         })
 
-        $('#addServiceButton').click(async function(event) {
-            event.preventDefault();
-
-            var fd = new FormData();
-            var files = $("#files")[0].files;
-            var file_name;
-            // Check file selected or not 
-            if (files.length > 0) {
-                fd.append('file', files[0]);
-                await axios.post("../../upload.php", fd, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }).then(function (response) {
-                    if(response.data != 0) {
-                        console.log('uploaded')
-                        file_name = response.data ;
-                    } else {
-                        alert('file not uploaded')
-                    }
-                }).catch((err) => {
-                    console.log("error upload : ", err)
-                })
-            } else {
-                alert("Please select a file.")
-            }
-
-            axios.post("../../controllers/hair_service/add.php", {
-                name: $("#addServiceName").val(),
-                price: $("#addServicePrice").val(),
-                type: params.get('service_type'),
-                file: file_name
-            }).then(function(response) {
-                location.reload();
-            }).catch((err) => {
-                console.log(err.response.data)
-                console.log(err.response.status)
-            })
-            // // $('#form').submit();
+        $('#backButton').click(function() {
+            location.href = 'hair_service_type.php'
         })
 
         document.getElementById('file-upload').addEventListener('click', event => {

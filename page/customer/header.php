@@ -44,6 +44,10 @@
                         </div>
                     </button>
                 </div>
+
+                <span class="mx-2">
+                    <i onclick="location.href= 'service_detail.php' " class="fas fa-shopping-cart" style="color: #fff; cursor: pointer;"></i>
+                </span>
         <?php 
             } else {
         ?>

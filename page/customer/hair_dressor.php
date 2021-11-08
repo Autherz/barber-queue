@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="mx-auto my-2">
-                        <button onclick=<?php echo 'location.href="hair_booking.php?hair_dressor_id=' . $v['hair_dressor_id'] . '&hair_dressor_name=' . $v['hair_dressor_name'] . '&hair_service_id=' . $_GET['hair_service_id'] . '"'; ?>  class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
+                        <button data-id=<?php echo $v['hair_dressor_id']; ?> data-name=<?php echo $v['hair_dressor_name']; ?> class="m-auto service__button" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
                     </div>
                 </div>
             </div>
@@ -79,47 +79,26 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="addService" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+    <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">เพิ่มบริการ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-container">
-                    <div class="d-flex px-5 my-2">
-                        <div class="my-auto">
-                            ชื่อช่างตัดผม
+                <!-- <div class="modal-header"> -->
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">การยืนยัน</h5> -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <!-- </div> -->
+                <div class="modal-body" style="background-color: #1A1A1A;">
+                    <div class="modal-container">
+                        <div class="d-flex text-white text-center" style="font-size: 24px;">
+                            <div class="mx-auto my-5">
+                                คุณต้องการยืนยันการทำรายการหรือไม่?
+                            </div>
                         </div>
-                        <div class="ms-auto">
-                            <input type="text" placeholder="ชื่่อบริการ" id="addHairDressorName">
+                        <div class="d-flex mx-auto">
+                            <div type="button" data-bs-dismiss="modal" class="ms-auto my-auto me-2 text-white">ยกเลิก</div>
+                            <button id="addServiceButton" type="button" class="btn btn-primary me-auto ms-2">ยืนยัน</button>
                         </div>
-                    </div>
-                    <div class="d-flex px-5 my-2">
-                        <div class="my-auto">
-                            เบอร์โทรศัพท์
-                        </div>
-                        <div class="ms-auto">
-                            <input type="number" placeholder="ราคา" id="addHairDressorPhone">
-                        </div>
-                    </div>
-                    <div class="d-flex px-5 my-2">
-                        <div class="my-auto">
-                            อัปโหลดรูป
-                        </div>
-                        <div class="ms-auto">
-                            <button id="file-upload" type="button" class="ml-auto my-auto py-2 px-4" style="color:#fff;background-color: #FC9C2C; border-radius: 20px;box-shadow: 0px 5px 20px 0px rgba(252, 156, 44, 0.33);border:none;">
-                                <input class="visuallyhidden" type="file" id="files" accept="image/*" />
-                                <span>อัปโหลด</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <img class="mx-auto mt-5 mb-2 img-thumbnail" id="preview">
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -127,6 +106,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script>
+
+        $('.service__button').click(async function(event) {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            if (id !== undefined) {
+                document.getElementById("addServiceButton").addEventListener('click', function(event) {
+                    window.location.href = 'hair_booking.php?hair_dressor_id=' + id + '&hair_dressor_name=' + name;
+                });
+            }
+        })
+
+
         $('#addHairDressorButton').click(async function(event) {
             event.preventDefault();
 

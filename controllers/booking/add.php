@@ -21,7 +21,7 @@
         $hair_service_data['hair_service_price'], 
         NULL,
         NULL,
-        'ยังไม่ชำระ',
+        'รอดำาเนินการ',
         $customer_id,
         '',
         0,

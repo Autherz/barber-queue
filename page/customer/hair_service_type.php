@@ -15,14 +15,6 @@
     } else {
         header("Location:../../index.php");
     }
-
-    if (isset($_GET['hair_service_id'] )) {
-        $_SESSION['hair_service_id'] = $_GET['hair_service_id'] ;
-    }
-
-    if (isset($_GET['worktime'] )) {
-        $_SESSION['worktime'] = $_GET['worktime'] ;
-    }
 ?>
 
 <!doctype html>
@@ -53,38 +45,34 @@
             </div>
         </div>
         <div class="row justify-content-md-center m-5 p-5">
+            <?php
+                $hairServices = ServiceType::get();
+                foreach($hairServices->fetchAll() as $k=>$v) {
+            ?>
             <div class="col-sm-12 col-md-4 col-lg-3 my-2">
                 <div class="d-flex flex-column service__content-container p-3">
-                    <div class="mx-auto my-3">
-                        <!-- <img class="w-100 h-100" src="" alt=""> -->
-                        <span><i class="fas fa-cut fa-7x"></i></span>
+                    <div class="mx-auto my-3" style="width: 100px; height: 100px;">
+                        <img class="w-100 h-100" src=<?php echo '../../' . $v['service_file']; ?> alt="">
                     </div>
                     <div class="mx-auto">
-                        เลือกบริการ
+                        <?php echo $v['service_type_name']; ?>
                     </div>
                     <div class="mx-auto my-2">
-                    <!-- onclick='location.href="hair_service_type.php"' -->
-                        <button id="" class="m-auto service__button" data-service="hair_service_type" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
+                        <button data-id=<?php echo $v['service_type_id']; ?> data-name=<?php echo $v['service_type_name']; ?> class="m-auto service__button" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 col-lg-3 my-2">
-                <div class="d-flex flex-column service__content-container p-3">
-                    <div class="mx-auto my-3">
-                        <!-- <img class="w-100 h-100" src="" alt=""> -->
-                        <span><i class="fas fa-users fa-7x"></i></span>
-                    </div>
-                    <div class="mx-auto">
-                        เลือกช่าง
-                    </div>
-                    <div class="mx-auto my-2">
-                    <!-- onclick='location.href="hair_dressor.php"' -->
-                        <button id="" class="m-auto service__button" data-service="hair_dressor" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
-                    </div>
-                </div>
-            </div>
+            <?php
+                }
+            ?>
+        </div>
+        <div class="d-flex ms-5 me-auto mt-auto me-2 mb-5">
+                <button onclick="window.history.back()" id="backButton" type="button" class="m-auto service__button">
+                    กลับ
+                </button>
         </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
@@ -110,47 +98,19 @@
             </div>
         </div>
     </div>
-
-    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script>
+
         $('.service__button').click(async function(event) {
-            var service = $(this).data('service');
-            if (service == "hair_service_type") {
-                console.log(service)
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            if (id !== undefined) {
                 document.getElementById("addServiceButton").addEventListener('click', function(event) {
-                    window.location.href='hair_service_type.php';
-                });
-            }
-
-            if (service == "hair_dressor") {
-                console.log(service)
-                document.getElementById("addServiceButton").addEventListener('click', function(event) {
-                    window.location.href='hair_dressor.php';
+                    window.location.href = 'hair_service.php?service_type_name=' + name + '&service_type=' + id;
                 });
             }
         })
-
-        document.getElementById('file-upload').addEventListener('click', event => {
-            console.log('click')
-            $('#files').trigger('click');
-        })
-
-        $('input[type="file"]').change(function(e) {
-            var fileName = e.target.files[0].name;
-            $("#file").val(fileName);
-
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("preview").src = e.target.result;
-            };
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
-        });
-        $('.img-thumbnail[src=""]').hide();
-        $('.img-thumbnail:not([src=""])').show();
     </script>
 </body>

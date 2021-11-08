@@ -58,7 +58,7 @@
                         กรุณานำหมายเลขการจองนี้ให้ช่างตัดผมดูเพื่อชำระเงิน
                     </div>
                     <div class="mx-auto my-2">
-                        <button onclick="location.href = 'main.php'" id="acceptButton" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
+                        <button onclick="location.href = 'success.php'" id="acceptButton" class="m-auto service__button" style="background-color: transparent;">ยืนยัน</button>
                     </div>
                 </div>
             </div>

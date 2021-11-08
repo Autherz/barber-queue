@@ -7,14 +7,18 @@
     require_once "../../models/workingtime.php";
     require_once "../../models/hair_service.php";
 
-    $hair_service = HairService::getById($_GET['hair_service_id']);
-    $workingtime_hair_dressor = WorkingTime::getInner($_GET['workingtime']);
+    if (isset($_SESSION['hair_service_id'])) {
+        $hair_service = HairService::getById($_SESSION['hair_service_id']);
+        $hair_service_data = $hair_service->fetch();
+        $_SESSION['hair_service'] = $hair_service_data;
+    }
 
-    $workingtime_hair_dressor_data = $workingtime_hair_dressor->fetch();
-    $hair_service_data = $hair_service->fetch();
-
-    $_SESSION['workingtime'] = $workingtime_hair_dressor_data;
-    $_SESSION['hair_service'] = $hair_service_data;
+    if (isset($_SESSION['worktime'])) {
+        $workingtime_hair_dressor = WorkingTime::getInner($_SESSION['worktime']);
+        $workingtime_hair_dressor_data = $workingtime_hair_dressor->fetch();
+        $_SESSION['workingtime'] = $workingtime_hair_dressor_data;
+    }
+    
     // #### Verify
     require_once "../../models/jwt.php";
     $data_token = Token::verify();
@@ -67,24 +71,61 @@
                             การใช้บริการที่คุณเลือก
                         </div>
                         <div>
-                            - <?php echo $hair_service_data['hair_service_name']; ?>
+                            <?php 
+                                if (isset($hair_service_data['hair_service_name'])) {
+                                    echo '-' . $hair_service_data['hair_service_name']; 
+                                }             
+                            ?>
                         </div>
                         <div class="service-detail-date">
-                            -วันที่ <?php echo $workingtime_hair_dressor_data['worktime_date']; ?>
+                             <?php 
+                                if (isset($workingtime_hair_dressor_data['worktime_date'])) {
+                                    echo '- วันที่ ' . $workingtime_hair_dressor_data['worktime_date']; 
+                                }      
+                            ?>
                         </div>
                         <div>
-                            -เวลา<?php echo $workingtime_hair_dressor_data['start_time']; ?> นาฬิกา
+                            <?php 
+                                if (isset($workingtime_hair_dressor_data['start_time'])) {
+                                    echo '- เวลา ' . $workingtime_hair_dressor_data['start_time'] . ' นาฬิกา'; 
+                                } 
+                            ?>
                         </div>
                         <div>
-                            -<?php echo $workingtime_hair_dressor_data['hair_dressor_name']; ?>
+                            <?php
+                                if (isset($workingtime_hair_dressor_data['hair_dressor_name'])) {
+                                    echo '- ' . $workingtime_hair_dressor_data['hair_dressor_name']; 
+                                } 
+                            ?>
                         </div>
                         <div class="mt-3">
-                            -ราคา <?php echo $hair_service_data['hair_service_price']; ?> บาท
+                            <?php
+                                if (isset($hair_service_data['hair_service_price'])) {
+                                    echo '- ราคา ' .  $hair_service_data['hair_service_price'] . ' บาท';  
+                                } 
+                                
+                            ?>
                         </div>
                     </div>
-                    <div class="mx-auto mb-2 mt-4">
-                        <button onclick=<?php echo 'location.href="../../controllers/booking/add.php' . '"'; ?> id="bookingButton"  class="m-auto service__button">ยืนยัน</button>
-                    </div>
+                    <?php 
+                        if (empty($hair_service_data)) {
+                            echo '<div class="d-flex mx-auto mt-3" style="color:#c90202;">*** โปรดเลือกการบริการ *** </div>' ;
+                        }
+
+                        if (empty($workingtime_hair_dressor_data)) {
+                            echo '<div class="d-flex mx-auto mt-3" style="color:#c90202;">*** โปรดเลือกช่าง *** </div>' ;
+                        }
+                    ?>
+
+                    <?php
+                        if (isset($hair_service_data) && isset($workingtime_hair_dressor_data)) {
+                    ?>
+                        <div class="mx-auto mb-2 mt-4">
+                            <button onclick=<?php echo 'location.href="../../controllers/booking/add.php' . '"'; ?> id="bookingButton"  class="m-auto service__button">ยืนยัน</button>
+                        </div>
+                    <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>

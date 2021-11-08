@@ -38,7 +38,7 @@
 
         public static function updateStatus($booking_id) {
             try {
-                $stmt = DB::get()->prepare("UPDATE booking SET slip_file = '$path', booking_status = 'ชำระแล้ว' WHERE booking_id = $booking_id");
+                $stmt = DB::get()->prepare("UPDATE booking SET slip_file = '$path', booking_status = 'ดำาเนินการเสร็จสิ้น' WHERE booking_id = $booking_id");
                 $stmt->execute();
                 // return DB::get()->lastInsertId();
             } catch(PDOException $e){

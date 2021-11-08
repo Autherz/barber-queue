@@ -118,7 +118,7 @@
                 file: file_name
             }).then(function(response) {
                 // location.reload();
-                location.href = 'main.php'
+                location.href = 'success.php'
             }).catch((err) => {
                 console.log(err.response.data)
                 console.log(err.response.status)

@@ -84,51 +84,30 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="addService" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">เพิ่มบริการ</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="modal-container">
-                <div class="d-flex px-5 my-2">
-                    <div class="my-auto">
-                        เริ่มงาน
-                    </div>
-                    <div class="ms-auto">
-                        <input class="datepicker" data-date-format="mm/dd/yyyy" id="date">
-                    </div>
-                </div>
-                <div class="d-flex px-5 my-2">
-                    <div class="my-auto">
-                        เริ่มงาน
-                    </div>
-                    <div class="ms-auto">
-                        <select class="" aria-label="Default select example" id="start">
-                        </select>
+        <!-- Modal -->
+        <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- <div class="modal-header"> -->
+                        <!-- <h5 class="modal-title" id="exampleModalLabel">การยืนยัน</h5> -->
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                    <!-- </div> -->
+                    <div class="modal-body" style="background-color: #1A1A1A;">
+                        <div class="modal-container">
+                            <div class="d-flex text-white text-center" style="font-size: 24px;">
+                                <div class="mx-auto my-5">
+                                    คุณต้องการยืนยันการทำรายการหรือไม่?
+                                </div>
+                            </div>
+                            <div class="d-flex mx-auto">
+                                <div type="button" data-bs-dismiss="modal" class="ms-auto my-auto me-2 text-white">ยกเลิก</div>
+                                <button id="addServiceButton" type="button" class="btn btn-primary me-auto ms-2">ยืนยัน</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex px-5 my-2">
-                    <div class="my-auto">
-                        เลิกงาน
-                    </div>
-                    <div class="ms-auto">
-                        <select class="" aria-label="Default select example" id="end">
-                        </select>
-                    </div>
-                </div>
-                <div class="d-flex px-5 my-2" id="addModalError"></div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button id="addHairDressorButton" type="button" class="btn btn-primary">เพิ่ม</button>
-        </div>
-        </div>
-    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -290,7 +269,7 @@
                 var tik = false
                 for(let k = 0; k < booking_data.length; k++) {
                     if ((booking_data[k].worktime_date == listDate[i]) && (booking_data[k].start_time == listTime[j].split(" -")[0]) && booking_data[k].hair_dressor_status == 'ว่าง') {
-                        booking += '<td><button class="w-100 booking-button"  data-array=' + k +'>' + 'จอง' + '</button></td>'
+                        booking += '<td><button class="w-100 booking-button"  data-array=' + k +' data-bs-toggle="modal" data-bs-target="#acceptButton">' + 'จอง' + '</button></td>'
                         tik = true
                     }
 
@@ -312,8 +291,15 @@
         );
 
         $('.booking-button').click(function() {
-            console.log(booking_data[$(this).attr('data-array')].working_time_id)
-            window.location = 'service_detail.php?'+ 'hair_service_id=' + params.get('hair_service_id') + '&workingtime=' + booking_data[$(this).attr('data-array')].working_time_id
+            var arraybooking = $(this).attr('data-array')
+            if (booking_data[arraybooking].working_time_id !== undefined) {
+                document.getElementById("addServiceButton").addEventListener('click', function(event) {
+                    console.log(arraybooking)
+                    window.location.href = 'main.php?worktime=' + booking_data[arraybooking].working_time_id
+                });
+            }
+            // window.location = 'main.php?worktime=' + booking_data[$(this).attr('data-array')].working_time_id
+           
         })
     });
     </script>

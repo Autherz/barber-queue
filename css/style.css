@@ -68,6 +68,22 @@ body {
     display: flex;
 }
 
+#modalAccept {
+    color: #fff;
+    background-color: #1A1A1A;
+    border: 2px solid #c90202;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+#modalAccept:hover {
+    color: #fff;
+    background-color: rgb(61, 59, 59);
+    border: 2px solid #c90202;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
 #addServiceButton {
     color: #fff;
     background-color: #1A1A1A;

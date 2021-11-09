@@ -148,6 +148,25 @@
                 <div class="d-flex">
                     <img class="mx-auto mt-5 mb-2 img-thumbnail" id="preview2">
                 </div>
+                <div class="d-flex px-5 my-2">
+                    <div class="my-auto">
+                        รายละเอียดผลงาน
+                    </div>
+                    <div class="ms-auto">
+                        <input class="form-control" type="text" placeholder="รายละเอียดผลงาน" id="editHairDressorWorkDetail">
+                    </div>
+                </div>
+                <div class="d-flex px-5 my-2">
+                    <div class="my-auto">
+                        อัปโหลดรูปผลงาน
+                    </div>
+                    <div class="ms-auto">
+                        <button id="file-upload3" type="button" class="ml-auto my-auto py-2 px-4 modal__upload-button">
+                            <input class="visuallyhidden" type="file" id="files3" accept="image/*" multiple/>
+                            <span>อัปโหลด</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -156,6 +175,30 @@
         </div>
         </div>
     </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- <div class="modal-header"> -->
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">การยืนยัน</h5> -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <!-- </div> -->
+                <div class="modal-body" style="background-color: #1A1A1A;">
+                    <div class="modal-container">
+                        <div class="d-flex text-white text-center" style="font-size: 24px;">
+                            <div class="mx-auto my-5">
+                                คุณต้องการยืนยันการทำรายการหรือไม่?
+                            </div>
+                        </div>
+                        <div class="d-flex mx-auto">
+                            <div type="button" data-bs-dismiss="modal" class="ms-auto my-auto me-2 text-white">ยกเลิก</div>
+                            <button id="modalAccept" type="button" class="btn btn-primary me-auto ms-2">ยืนยัน</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -229,6 +272,8 @@
 
             var fd = new FormData();
             var files = $("#files2")[0].files;
+            var workFiles = $("#files3")[0].files;
+    
             var file_name;
             // Check file selected or not 
             if (files.length > 0) {
@@ -252,20 +297,27 @@
                 console.log($("#preview2").attr('src'))
                 file_name = $("#preview2").attr('src').replace('../../', '')
             }
+
+            if (workFiles.length > 0) {
+                
+            } else {
+                console.log($("#preview3").attr('src'))
+                file_name = $("#preview3").attr('src').replace('../../', '')
+            }
             
-            axios.put("../../controllers/hair_dressor/update.php", {
-                id: $("#editHairDressorId").val(),
-                name: $("#editHairDressorName").val(),
-                phone: $("#editHairDressorPhone").val(),
-                // price: $("#addServicePrice").val(),
-                // type: $("#addSelectType").find(':selected').data('id'),
-                file: file_name
-            }).then(function(response) {
-                location.reload();
-            }).catch((err) => {
-                console.log(err.response.data)
-                console.log(err.response.status)
-            })
+            // axios.put("../../controllers/hair_dressor/update.php", {
+            //     id: $("#editHairDressorId").val(),
+            //     name: $("#editHairDressorName").val(),
+            //     phone: $("#editHairDressorPhone").val(),
+            //     // price: $("#addServicePrice").val(),
+            //     // type: $("#addSelectType").find(':selected').data('id'),
+            //     file: file_name
+            // }).then(function(response) {
+            //     location.reload();
+            // }).catch((err) => {
+            //     console.log(err.response.data)
+            //     console.log(err.response.status)
+            // })
             // // $('#form').submit();
         })
 
@@ -291,7 +343,24 @@
             $('#files2').trigger('click');
         })
 
-        $('input[type="file"]').change(function(e) {
+        document.getElementById('file-upload3').addEventListener('click', event => {
+            console.log('click')
+            $('#files3').trigger('click');
+        })
+
+        $('input[id="files"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("preview").src = e.target.result;
+            };
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        $('input[id="files2"]').change(function(e) {
             var fileName = e.target.files[0].name;
 
             var reader = new FileReader();
@@ -319,7 +388,7 @@
             hair_dressor += '<div class="d-flex flex-column service__content-container p-3">'
             hair_dressor +=     '<div class="d-flex">'
             hair_dressor +=         '<button class="service_edit m-auto service__button"  data-array='+ i + ' data-bs-toggle="modal" data-bs-target="#editService">แก้ไข</button>'
-            hair_dressor +=         '<button class="service_delete m-auto service__button"  data-array='+ i + '>ลบ</button>'
+            // hair_dressor +=         '<button class="service_delete m-auto service__button"  data-array='+ i + '>ลบ</button>'
             hair_dressor +=     '</div>'
             hair_dressor +=     '<div class="mx-auto my-3" style="width: 100px; height: 100px;">'
             hair_dressor +=         '<img class="w-100 h-100" src=../../' + hair_dressor_data[i].hair_dressor_image + ' alt="">'
@@ -334,7 +403,7 @@
             hair_dressor +=        '</div>'
             hair_dressor +=     '</div>'
             hair_dressor +=     '<div class="mx-auto my-2">'
-            hair_dressor +=         '<button onclick="location.href=\'hair_booking.php?hair_dressor_id=' +  hair_dressor_data[i].hair_dressor_id + '&hair_dressor_name=' + hair_dressor_data[i].hair_dressor_name + '\'" class="m-auto service__button" >ยืนยัน</button>'
+            hair_dressor +=         '<button data-id=' +  hair_dressor_data[i].hair_dressor_id + ' data-name=' + hair_dressor_data[i].hair_dressor_name + ' class="m-auto service__button" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>'
             hair_dressor +=     '</div>'
             hair_dressor +=  '</div>'
             hair_dressor +=  '</div>'
@@ -363,6 +432,17 @@
                 console.log(err.response.data)
                 console.log(err.response.status)
             })
+        })
+
+        $('.service__button').click(async function(event) {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            console.log(id)
+            if (id !== undefined) {
+                document.getElementById("modalAccept").addEventListener('click', function(event) {
+                    window.location.href='hair_booking.php?hair_dressor_id=' + id + '&hair_dressor_name=' + name;
+                });
+            }
         })
     });
     </script>

@@ -48,7 +48,39 @@
         <div class="d-flex my-5">
             <button class="ms-auto me-5 service__button-add" data-bs-toggle="modal" data-bs-target="#addService">เพิ่มบริการ</button>
         </div>
-        <div class="row justify-content-md-center m-5 p-5" id="service_list">
+        <!-- <div class="row justify-content-md-center m-5 p-5" id="service_list">
+        </div> -->
+        <div class="row justify-content-md-center m-5 p-5">
+            <div class="col-sm-12 col-md-4 col-lg-3 my-2">
+                <div class="d-flex flex-column service__content-container p-3">
+                    <div class="mx-auto my-3">
+                        <!-- <img class="w-100 h-100" src="" alt=""> -->
+                        <span><i class="fas fa-cut fa-7x"></i></span>
+                    </div>
+                    <div class="mx-auto">
+                        เลือกบริการ
+                    </div>
+                    <div class="mx-auto my-2">
+                    <!-- onclick='location.href="hair_service_type.php"' -->
+                        <button id="" class="m-auto service__button" data-service="hair_service_type" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 my-2">
+                <div class="d-flex flex-column service__content-container p-3">
+                    <div class="mx-auto my-3">
+                        <!-- <img class="w-100 h-100" src="" alt=""> -->
+                        <span><i class="fas fa-users fa-7x"></i></span>
+                    </div>
+                    <div class="mx-auto">
+                        เลือกช่าง
+                    </div>
+                    <div class="mx-auto my-2">
+                    <!-- onclick='location.href="hair_dressor.php"' -->
+                        <button id="" class="m-auto service__button" data-service="hair_dressor" style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#acceptButton">ยืนยัน</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -94,7 +126,31 @@
     </div>
     </div>
 
-    
+    <!-- Modal -->
+    <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- <div class="modal-header"> -->
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">การยืนยัน</h5> -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <!-- </div> -->
+                <div class="modal-body" style="background-color: #1A1A1A;">
+                    <div class="modal-container">
+                        <div class="d-flex text-white text-center" style="font-size: 24px;">
+                            <div class="mx-auto my-5">
+                                คุณต้องการยืนยันการทำรายการหรือไม่?
+                            </div>
+                        </div>
+                        <div class="d-flex mx-auto">
+                            <div type="button" data-bs-dismiss="modal" class="ms-auto my-auto me-2 text-white">ยกเลิก</div>
+                            <button id="modalAccept" type="button" class="btn btn-primary me-auto ms-2">ยืนยัน</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- EditModal -->
     <div class="modal fade" id="editService" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -141,6 +197,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script>
+
+    $('.service__button').click(async function(event) {
+        var service = $(this).data('service');
+        if (service == "hair_service_type") {
+            console.log(service)
+            document.getElementById("modalAccept").addEventListener('click', function(event) {
+                window.location.href='hair_service_type.php';
+            });
+        }
+
+        if (service == "hair_dressor") {
+            console.log(service)
+            document.getElementById("modalAccept").addEventListener('click', function(event) {
+                window.location.href='hair_dressor.php';
+            });
+        }
+    })
+
     $(document).ready(async function() {
         $('#addServiceButton').click(async function(event) {
             event.preventDefault();

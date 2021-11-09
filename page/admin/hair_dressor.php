@@ -167,6 +167,9 @@
                         </button>
                     </div>
                 </div>
+                <div class="imgGallery"> 
+                    <!-- Image preview -->
+                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -271,6 +274,7 @@
             event.preventDefault();
 
             var fd = new FormData();
+            var fd2 = new FormData();
             var files = $("#files2")[0].files;
             var workFiles = $("#files3")[0].files;
     
@@ -299,26 +303,44 @@
             }
 
             if (workFiles.length > 0) {
-                
+                fd.append('hair_dressor_id', $("#editHairDressorId").val())
+                for(let i = 0; i < workFiles.length; i++) {
+                    fd2.append('file', workFiles[i])
+                }
+                await axios.post("../../uploads.php",fd2, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(function (response) {
+                    if(response.data != 0) {
+                        console.log('uploaded 2')
+                        // file_name = response.data ;
+                    } else {
+                        alert('file not uploaded 2')
+                    }
+                }).catch((err) => {
+                    console.log("error upload : ", err)
+                })
             } else {
-                console.log($("#preview3").attr('src'))
-                file_name = $("#preview3").attr('src').replace('../../', '')
+                // console.log($("#preview3").attr('src'))
+                // file_name = $("#preview3").attr('src').replace('../../', '')
             }
             
-            // axios.put("../../controllers/hair_dressor/update.php", {
-            //     id: $("#editHairDressorId").val(),
-            //     name: $("#editHairDressorName").val(),
-            //     phone: $("#editHairDressorPhone").val(),
-            //     // price: $("#addServicePrice").val(),
-            //     // type: $("#addSelectType").find(':selected').data('id'),
-            //     file: file_name
-            // }).then(function(response) {
-            //     location.reload();
-            // }).catch((err) => {
-            //     console.log(err.response.data)
-            //     console.log(err.response.status)
-            // })
-            // // $('#form').submit();
+            axios.put("../../controllers/hair_dressor/update.php", {
+                id: $("#editHairDressorId").val(),
+                name: $("#editHairDressorName").val(),
+                phone: $("#editHairDressorPhone").val(),
+                work_detail: $("#editHairDressorWorkDetail").val(),
+                // price: $("#addServicePrice").val(),
+                // type: $("#addSelectType").find(':selected').data('id'),
+                file: file_name
+            }).then(function(response) {
+                location.reload();
+            }).catch((err) => {
+                console.log(err.response.data)
+                console.log(err.response.status)
+            })
+            // $('#form').submit();
         })
 
         $('input[type="file"]').change(function(e) {
@@ -419,6 +441,7 @@
             // $('#editServiceServiceTypeId').val(hair_services_data[$(this).attr('data-array')].service_type_id);
             $('#editHairDressorName').val(hair_dressor_data[$(this).attr('data-array')].hair_dressor_name);
             $('#editHairDressorPhone').val(hair_dressor_data[$(this).attr('data-array')].hair_dressor_phone);
+            $('#editHairDressorWorkDetail').val(hair_dressor_data[$(this).attr('data-array')].hair_dressor_work_detail);
             $("#preview2").attr("src", '../../' + hair_dressor_data[$(this).attr('data-array')].hair_dressor_image);
         })
 
@@ -444,6 +467,24 @@
                 });
             }
         })
+
+        var multiImgPreview = function(input, imgPreviewPlaceholder) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i=0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        $($.parseHTML('<img class="mx-1 mt-2 mb-2 img-thumbnail">')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $('#files3').on('change', function() {
+            multiImgPreview(this, 'div.imgGallery');
+        });
     });
     </script>
 </body>

@@ -4,15 +4,17 @@
         public $name;
         public $phone;
         public $image;
-        function __construct($name, $phone, $image) {
+        public $work_detail;
+        function __construct($name, $phone, $image, $work_detail) {
             $this->name = $name;
             $this->phone = $phone;
             $this->image = $image;
+            $this->work_detail = $work_detail;
         }
         public function add() {
             try {
 
-                $stmt = DB::get()->prepare("INSERT INTO hair_dressor VALUES (NULL, '$this->name', '$this->phone', '$this->image', 0);");
+                $stmt = DB::get()->prepare("INSERT INTO hair_dressor VALUES (NULL, '$this->name', '$this->phone', '$this->image', '$this->work_detail', 0);");
                 $stmt->execute();
             } catch(PDOException $e){
                 echo "Error: " . $e->getMessage();
@@ -43,7 +45,7 @@
 
         public function update($id) {
             try {
-                $stmt = DB::get()->prepare("UPDATE hair_dressor SET hair_dressor_name = '$this->name', hair_dressor_image = '$this->image', hair_dressor_phone = '$this->phone' WHERE hair_dressor_id = $id");
+                $stmt = DB::get()->prepare("UPDATE hair_dressor SET hair_dressor_name = '$this->name', hair_dressor_image = '$this->image', hair_dressor_phone = '$this->phone', hair_dressor_work_detail = '$this->work_detail' WHERE hair_dressor_id = $id");
                 $stmt->execute();
                 // return DB::get()->lastInsertId();
             } catch(PDOException $e){

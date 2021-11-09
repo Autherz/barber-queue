@@ -6,7 +6,7 @@
 
     $data = json_decode(file_get_contents("php://input"), TRUE);
 
-    $serviceType = new HairDressor($data['name'], $data['phone'], $data['file']);
+    $serviceType = new HairDressor($data['name'], $data['phone'], $data['file'], $data['work_detail']);
     $serviceType->update($data['id']);
     http_response_code(200);
     echo json_encode([

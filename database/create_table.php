@@ -35,6 +35,7 @@
             hair_dressor_name VARCHAR(100) NOT NULL,
             hair_dressor_phone VARCHAR(100) NOT NULL,
             hair_dressor_image VARCHAR(100),
+            hair_dressor_work_detail VARCHAR(100),
             disable INT NOT NULL,
             PRIMARY KEY(hair_dressor_id)
         );',
@@ -75,6 +76,13 @@
             PRIMARY KEY(booking_detail_id),
             FOREIGN KEY(booking_id) REFERENCES booking(booking_id),
             FOREIGN KEY(hair_service_id) REFERENCES hair_service(hair_service_id),
+            FOREIGN KEY(hair_dressor_id) REFERENCES hair_dressor(hair_dressor_id)
+        );',
+        'CREATE TABLE work_hair_dressor (
+            work_hair_dressor_id INT AUTO_INCREMENT,
+            images VARCHAR(100),
+            hair_dressor_id INT,
+            PRIMARY KEY(work_hair_dressor_id),
             FOREIGN KEY(hair_dressor_id) REFERENCES hair_dressor(hair_dressor_id)
         );'
     ];

@@ -6,7 +6,7 @@
 
     $data = json_decode(file_get_contents("php://input"), TRUE);
 
-    $hairDressor = new HairDressor($data['name'], $data['phone'], $data['image']);
+    $hairDressor = new HairDressor($data['name'], $data['phone'], $data['image'], null);
     $hairDressor->add();
     http_response_code(200);
     echo json_encode([
